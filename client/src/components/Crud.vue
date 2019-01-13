@@ -68,7 +68,7 @@ export default {
         sortable: false,
         value: "name"
       },
-      { text: "Champ name", value: "calories" },0
+      { text: "Champ name", value: "calories" },
       { text: "Type", value: "fat" },
       { text: "Lane", value: "carbs" },
       { text: "Cost", value: "protein" },
