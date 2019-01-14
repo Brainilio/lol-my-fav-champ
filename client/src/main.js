@@ -5,17 +5,12 @@ import Vuetify from 'vuetify'
 import App from './App'
 import router from './router'
 import 'vuetify/dist/vuetify.min.css'
-import axios from 'axios'
-
-
-
-Vue.prototype.$http = axios
-
+import VueResource from 'vue-resource'
 
 Vue.config.productionTip = false
 
-Vue.use(Vuetify)
 
+Vue.use(Vuetify, VueResource)
 
 /* eslint-disable no-new */
 new Vue({
