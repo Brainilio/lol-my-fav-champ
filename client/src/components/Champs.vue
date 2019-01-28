@@ -1,19 +1,52 @@
 <template>
   <v-container>
-    <v-dialog v-model="form">
-      <div class="container">
-        <v-form if="!submitted" ref="form" v-model="valid" lazy-validation>
-          <v-text-field v-model="namepost" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+    <v-btn fab small color="blue" @click="addclick">
+      <v-icon>add</v-icon>
+    </v-btn>
 
-          <v-text-field v-model="typepost" :rules="nameRules" label="Type" required></v-text-field>
-
-          <v-text-field v-model="lanepost" :rules="nameRules" label="Lane" required></v-text-field>
-
-          <v-text-field v-model="costpost" :rules="nameRules" label="Cost" required></v-text-field>
-
-          <v-btn :disabled="!valid" color="primary" @click="post">Add</v-btn>
-        </v-form>
-      </div>
+    <v-dialog v-model="form" dark color="white" max-width="500px">
+      <v-card>
+        <div class="container">
+          <v-form if="!submitted" dark color="white" ref="form" v-model="valid" lazy-validation>
+            <h1>Add a champion:</h1>
+            <v-text-field
+              v-model="namepost"
+              :counter="10"
+              :rules="nameRules"
+              label="Name"
+              color="white"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="typepost"
+              :counter="10"
+              :rules="nameRules"
+              label="Type"
+              color="white"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="lanepost"
+              :counter="10"
+              :rules="nameRules"
+              label="Lane"
+              color="white"
+              required
+            ></v-text-field>
+            <v-text-field
+              v-model="costpost"
+              :counter="10"
+              :rules="nameRules"
+              label="Cost"
+              color="white"
+              required
+            ></v-text-field>
+            <br>
+            <v-btn color="primary" @click="post">Add</v-btn>
+            <v-btn color="red" @click="closepost" class="right">Cancel</v-btn>
+          </v-form>
+        </div>
+      </v-card>
     </v-dialog>
 
     <v-dialog dark color="white" v-model="submitted" max-width="500px">
@@ -23,13 +56,21 @@
     </v-dialog>
 
     <div id="show-champs">
-      <h1>Champs</h1>
+      <h1>League of Legends champions:</h1>
+      
       <div v-for="champ in champs" v-bind:key="champ._id" class="single-champ">
         <h1>{{champ.name}}</h1>
-
-        <v-icon class="mr-2" @click="viewItem(champ, champ._id)">touch_app</v-icon>
-        <v-icon class="mr-2" @click="editItem(champ)">edit</v-icon>
-        <v-icon class="mr-2" @click="deleteChamp(champ, champ._id)">delete</v-icon>
+        <v-icon
+          class="mr-2"
+          v-ripple="{ center: true }"
+          @click="viewItem(champ, champ._id)"
+        >touch_app</v-icon>
+        <v-icon class="mr-2" v-ripple="{ center: true }" @click="editItem(champ)">edit</v-icon>
+        <v-icon
+          class="mr-2"
+          v-ripple="{ center: true }"
+          @click="deleteChamp(champ, champ._id)"
+        >delete</v-icon>
         <br>
         <br>
       </div>
@@ -38,7 +79,6 @@
     <v-dialog dark color="white" v-model="view" max-width="500px">
       <v-card>
         <v-card-title class="headline black lighten-2" primary-title>{{editedItem.name}}</v-card-title>
-
         <v-card-text>
           {{editedItem.name}} is een champion uit het spel League of Legends. De champion is een {{editedItem.type}} en speelt op de {{editedItem.lane}} lane.
           Deze champion kost {{editedItem.cost}}.
@@ -80,7 +120,10 @@ import axios from "axios";
 export default {
   data() {
     return {
-      valid: true,
+      rowsPerPageItems: [4, 8, 12],
+      pagination: {
+        rowsPerPage: 4
+      },
       namepost: "",
       typepost: "",
       lanepost: "",
@@ -92,6 +135,7 @@ export default {
       submitted: false,
       dialog: false,
       view: false,
+      form: false,
       champs: [],
       editedIndex: -1,
       editedItem: {
@@ -172,6 +216,13 @@ export default {
         this.champs.push(this.editedItem);
       }
       this.close();
+    },
+    closepost() {
+      this.form = false;
+    },
+
+    addclick() {
+      this.form = true;
     }
   },
 
@@ -187,7 +238,7 @@ export default {
 
 <style>
 #show-champs {
-  max-width: 800px;
+  max-width: 500px;
   margin: 0 auto;
 }
 
