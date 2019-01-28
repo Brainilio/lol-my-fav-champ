@@ -1,18 +1,20 @@
 <template>
   <v-container>
-    <div class="container">
-      <v-form if="!submitted" ref="form" v-model="valid" lazy-validation>
-        <v-text-field v-model="namepost" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+    <v-dialog v-model="form">
+      <div class="container">
+        <v-form if="!submitted" ref="form" v-model="valid" lazy-validation>
+          <v-text-field v-model="namepost" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
 
-        <v-text-field v-model="typepost" :rules="nameRules" label="Type" required></v-text-field>
+          <v-text-field v-model="typepost" :rules="nameRules" label="Type" required></v-text-field>
 
-        <v-text-field v-model="lanepost" :rules="nameRules" label="Lane" required></v-text-field>
+          <v-text-field v-model="lanepost" :rules="nameRules" label="Lane" required></v-text-field>
 
-        <v-text-field v-model="costpost" :rules="nameRules" label="Cost" required></v-text-field>
+          <v-text-field v-model="costpost" :rules="nameRules" label="Cost" required></v-text-field>
 
-        <v-btn :disabled="!valid" color="primary" @click="post">Add</v-btn>
-      </v-form>
-    </div>
+          <v-btn :disabled="!valid" color="primary" @click="post">Add</v-btn>
+        </v-form>
+      </div>
+    </v-dialog>
 
     <v-dialog dark color="white" v-model="submitted" max-width="500px">
       <v-card>
