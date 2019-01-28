@@ -23,10 +23,7 @@
     <div id="show-champs">
       <h1>Champs</h1>
       <div v-for="champ in champs" v-bind:key="champ._id" class="single-champ">
-        <h2>{{champ.name}}</h2>
-        <h3>{{champ.lane}}</h3>
-        <h4>{{champ.type}}</h4>
-        <h5>{{champ.cost}}</h5>
+        <h1>{{champ.name}}</h1>
 
         <v-icon class="mr-2" @click="viewItem(champ, champ._id)">touch_app</v-icon>
         <v-icon class="mr-2" @click="editItem(champ)">edit</v-icon>
@@ -40,7 +37,10 @@
       <v-card>
         <v-card-title class="headline black lighten-2" primary-title>{{editedItem.name}}</v-card-title>
 
-        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
+        <v-card-text>
+          {{editedItem.name}} is een champion uit het spel League of Legends. De champion is een {{editedItem.type}} en speelt op de {{editedItem.lane}} lane.
+          Deze champion kost {{editedItem.cost}}.
+        </v-card-text>
       </v-card>
     </v-dialog>
 
