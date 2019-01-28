@@ -1,6 +1,25 @@
 <template>
   <v-container>
-    <add-champ></add-champ>
+    <div class="container">
+      <v-form if="!submitted" ref="form" v-model="valid" lazy-validation>
+        <v-text-field v-model="namepost" :counter="10" :rules="nameRules" label="Name" required></v-text-field>
+
+        <v-text-field v-model="typepost" :rules="nameRules" label="Type" required></v-text-field>
+
+        <v-text-field v-model="lanepost" :rules="nameRules" label="Lane" required></v-text-field>
+
+        <v-text-field v-model="costpost" :rules="nameRules" label="Cost" required></v-text-field>
+
+        <v-btn :disabled="!valid" color="primary" @click="post">Add</v-btn>
+      </v-form>
+    </div>
+
+    <v-dialog dark color="white" v-model="submitted" max-width="500px">
+      <v-card>
+        <v-card-title>Thank you for posting!</v-card-title>
+      </v-card>
+    </v-dialog>
+
     <div id="show-champs">
       <h1>Champs</h1>
       <div v-for="champ in champs" v-bind:key="champ._id" class="single-champ">
@@ -8,12 +27,23 @@
         <h3>{{champ.lane}}</h3>
         <h4>{{champ.type}}</h4>
         <h5>{{champ.cost}}</h5>
-        <v-icon small @click="deleteChamp(champ, champ._id)">delete</v-icon>
-        <v-icon small class="mr-2" @click="editItem(champ)">edit</v-icon>
+
+        <v-icon class="mr-2" @click="viewItem(champ, champ._id)">touch_app</v-icon>
+        <v-icon class="mr-2" @click="editItem(champ)">edit</v-icon>
+        <v-icon class="mr-2" @click="deleteChamp(champ, champ._id)">delete</v-icon>
         <br>
         <br>
       </div>
     </div>
+
+    <v-dialog dark color="white" v-model="view" max-width="500px">
+      <v-card>
+        <v-card-title class="headline black lighten-2" primary-title>{{editedItem.name}}</v-card-title>
+
+        <v-card-text>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</v-card-text>
+      </v-card>
+    </v-dialog>
+
     <v-dialog dark color="white" v-model="dialog" max-width="500px">
       <v-card-text>
         <v-container grid-list-md>
@@ -33,7 +63,6 @@
           </v-layout>
         </v-container>
       </v-card-text>
-
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn color="white" flat @click="close">Cancel</v-btn>
@@ -45,12 +74,22 @@
 
 <script>
 import axios from "axios";
-import addChamp from "./addChamp";
 
 export default {
   data() {
     return {
+      valid: true,
+      namepost: "",
+      typepost: "",
+      lanepost: "",
+      costpost: "",
+      nameRules: [
+        v => !!v || "required!",
+        v => (v && v.length <= 10) || "Must be less than 10 characters"
+      ],
+      submitted: false,
       dialog: false,
+      view: false,
       champs: [],
       editedIndex: -1,
       editedItem: {
@@ -61,14 +100,47 @@ export default {
       }
     };
   },
-  components: {
-    addChamp
-  },
+  components: {},
   methods: {
+    post: function() {
+      var self = this;
+      const axios = require("axios");
+      axios
+        .post("http://174.138.9.130:8000/champs", {
+          name: this.namepost,
+          type: this.typepost,
+          lane: this.lanepost,
+          cost: this.costpost
+        })
+        .then(function(response) {
+          console.log(response);
+          self.champs.push(response.data);
+          self.submitted = true;
+
+          self.namepost = "";
+          self.typepost = "";
+          self.lanepost = "";
+          self.costpost = "";
+        })
+
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+
     deleteChamp(champs, _id) {
       const axios = require("axios");
       axios.delete("http://174.138.9.130:8000/champs/" + _id);
       this.champs.splice(this.champs.indexOf(champs), 1);
+    },
+
+    viewItem(champs, _id) {
+      const axios = require("axios");
+      axios.get("http://174.138.9.130:8000/champs/" + _id);
+      this.editedIndex = this.champs.indexOf(champs);
+      this.editedItem = Object.assign({}, champs);
+      this.view = true;
+      console.log(this.editedItem);
     },
     editItem(item) {
       this.editedIndex = this.champs.indexOf(item);
@@ -82,7 +154,6 @@ export default {
         this.editedIndex = -1;
       }, 300);
     },
-
     save(item, id) {
       const axios = require("axios");
 
@@ -101,6 +172,7 @@ export default {
       this.close();
     }
   },
+
   created() {
     const axios = require("axios");
     axios.get("http://174.138.9.130:8000/champs").then(response => {

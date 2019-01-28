@@ -50,10 +50,10 @@ export default {
       const axios = require("axios");
       axios
         .post("http://174.138.9.130:8000/champs", {
-          name: this.name,
-          type: this.type,
-          lane: this.lane,
-          cost: this.cost
+          name: this.namepost,
+          type: this.typepost,
+          lane: this.lanepost,
+          cost: this.costpost
         })
         .then(function(response) {
           console.log(response);
