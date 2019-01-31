@@ -6,15 +6,17 @@ import App from './App'
 import router from './router'
 import 'vuetify/dist/vuetify.min.css'
 import VueResource from 'vue-resource'
+import store from './store'
 
 Vue.config.productionTip = false
 
 
-Vue.use(Vuetify, VueResource)
+Vue.use(Vuetify)
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
+  store,
   router,
   components: {
     App

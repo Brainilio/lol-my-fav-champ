@@ -57,9 +57,11 @@
 
     <div id="show-champs">
       <h1>League of Legends champions:</h1>
-      
+
       <div v-for="champ in champs" v-bind:key="champ._id" class="single-champ">
-        <h1>{{champ.name}}</h1>
+        <router-link v-bind:to="'/' + champ._id">
+          <h1>{{champ.name}}</h1>
+        </router-link>
         <v-icon
           class="mr-2"
           v-ripple="{ center: true }"
@@ -87,29 +89,31 @@
     </v-dialog>
 
     <v-dialog dark color="white" v-model="dialog" max-width="500px">
-      <v-card-text>
-        <v-container grid-list-md>
-          <v-layout wrap>
-            <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.name" label="Champion Name"></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.type" label="Champion Type"></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.lane" label="Champion Lane"></v-text-field>
-            </v-flex>
-            <v-flex xs12 sm6 md4>
-              <v-text-field v-model="editedItem.cost" label="Champion Cost"></v-text-field>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-card-text>
-      <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="white" flat @click="close">Cancel</v-btn>
-        <v-btn color="white" flat @click="save(editedItem, editedItem._id)">Save</v-btn>
-      </v-card-actions>
+      <v-card>
+        <v-card-text>
+          <v-container grid-list-md>
+            <v-layout wrap>
+              <v-flex xs12 sm6 md4>
+                <v-text-field v-model="editedItem.name" label="Champion Name"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field v-model="editedItem.type" label="Champion Type"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field v-model="editedItem.lane" label="Champion Lane"></v-text-field>
+              </v-flex>
+              <v-flex xs12 sm6 md4>
+                <v-text-field v-model="editedItem.cost" label="Champion Cost"></v-text-field>
+              </v-flex>
+            </v-layout>
+          </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="white" flat @click="close">Cancel</v-btn>
+          <v-btn color="white" flat @click="save(editedItem, editedItem._id)">Save</v-btn>
+        </v-card-actions>
+      </v-card>
     </v-dialog>
   </v-container>
 </template>
@@ -120,10 +124,6 @@ import axios from "axios";
 export default {
   data() {
     return {
-      rowsPerPageItems: [4, 8, 12],
-      pagination: {
-        rowsPerPage: 4
-      },
       namepost: "",
       typepost: "",
       lanepost: "",
