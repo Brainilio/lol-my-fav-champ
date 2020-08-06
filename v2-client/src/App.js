@@ -10,8 +10,6 @@ function App() {
 
 	// get rid of dom elements after loader is over
 	const [shouldIntroExist, setShouldIntroExist] = useState(true)
-	const [divOneClass, setdivOneClass] = useState("intro-half-one")
-	const [divTwoClass, setdivTwoClass] = useState("intro-half-two")
 
 	useEffect(() => {
 		console.log("I'm re-rendering!")
@@ -19,10 +17,8 @@ function App() {
 		//remove divs after 2 seconds
 		setTimeout(() => {
 			setShouldIntroExist(false)
-			// setdivOneClass("intro-half-one-deleted")
-			// setdivTwoClass("intro-half-one-deleted")
 		}, 5000)
-	}, [gsap, divOne, divTwo, logo])
+	}, [divOne, divTwo, logo])
 
 	const introHandler = () => {
 		gsap.to(logo.current, { rotation: 720, duration: 4, ease: "power4" })
@@ -45,6 +41,7 @@ function App() {
 	if (!shouldIntroExist) {
 		cards = <Cards />
 	}
+
 	return (
 		<>
 			<img ref={logo} className="riot-logo" src={Logo} alt="riot logo" />
@@ -53,8 +50,8 @@ function App() {
 					className="intro"
 					style={{ height: "100vh", display: "flex", position: "absolute" }}
 				>
-					<div ref={divOne} className={divOneClass}></div>
-					<div ref={divTwo} className={divTwoClass}></div>
+					<div ref={divOne} className="intro-half-one"></div>
+					<div ref={divTwo} className="intro-half-two"></div>
 				</section>
 			) : null}
 			{cards}
