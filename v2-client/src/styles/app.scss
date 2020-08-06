@@ -7,35 +7,44 @@ body {
 	box-sizing: border-box;
 }
 
-.intro-half-one {
-	width: 50%;
-	height: 100%;
+.intro {
+	.intro-half-one {
+		width: 50%;
+		height: 100%;
 
-	background: rgb(175, 36, 36);
-	background: linear-gradient(
-		180deg,
-		rgba(175, 36, 36, 1) 0%,
-		rgba(182, 60, 112, 1) 50%,
-		rgba(79, 30, 50, 1) 100%
-	);
-}
+		background: rgb(175, 36, 36);
+		background: linear-gradient(
+			180deg,
+			rgba(175, 36, 36, 1) 0%,
+			rgba(182, 60, 112, 1) 50%,
+			rgba(79, 30, 50, 1) 100%
+		);
+	}
+	.intro-half-two {
+		width: 50%;
+		height: 100%;
+		background: rgb(175, 36, 36);
+		background: linear-gradient(
+			180deg,
+			rgba(175, 36, 36, 1) 0%,
+			rgba(182, 60, 112, 1) 50%,
+			rgba(79, 30, 50, 1) 100%
+		);
+	}
 
-.intro-half-two {
-	width: 50%;
-	height: 100%;
-	background: rgb(175, 36, 36);
-	background: linear-gradient(
-		180deg,
-		rgba(175, 36, 36, 1) 0%,
-		rgba(182, 60, 112, 1) 50%,
-		rgba(79, 30, 50, 1) 100%
-	);
-}
+	.riot-logo {
+		position: absolute;
+		width: 150px;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);
+	}
 
-.riot-logo {
-	position: absolute;
-	width: 150px;
-	left: 50%;
-	top: 50%;
-	transform: translate(-50%, -50%);
+	.intro-half-two-deleted {
+		display: none;
+	}
+
+	.intro-half-one-deleted {
+		display: none;
+	}
 }
