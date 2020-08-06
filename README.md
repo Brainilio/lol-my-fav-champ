@@ -5,6 +5,7 @@
 **_SERVER IS DOWN_**
 Full stack project created in Vuejs, Express, Node and MongoDB
 
-LoL my favorite champion is a full-stack application in which you can display your favorite League of Legends champions on your own dashboard. You can update, delete and add more champions as you go :)
+LoL my favorite champion is a full-stack application in which you can manage your favorite League of Legends champions. You can update, delete and add more champions as you go :)
 
-Video showing/explaining the project (IN DUTCH): https://vimeo.com/314594132
+Video client side: https://vimeo.com/445248487
+
