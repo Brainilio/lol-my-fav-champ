@@ -1,4 +1,20 @@
 .card-page {
 	width: 100vw;
-	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	.card-section {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr 1fr;
+		justify-content: center;
+
+		.single-champion {
+			margin: 20px 20px;
+			width: 250px;
+			height: 250px;
+			border: 1px solid #9c4679;
+			align-self: center;
+		}
+	}
 }

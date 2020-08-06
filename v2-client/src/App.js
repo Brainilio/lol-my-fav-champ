@@ -34,7 +34,12 @@ function App() {
 			ease: "bounce",
 			delay: 3,
 		})
-		gsap.to(logo.current, { y: -350, duration: 0.8, ease: "power", delay: 3 })
+		gsap.to(logo.current, {
+			y: -window.innerWidth,
+			duration: 0.8,
+			ease: "power",
+			delay: 3,
+		})
 	}
 
 	let cards = null
@@ -44,15 +49,17 @@ function App() {
 
 	return (
 		<>
-			<img ref={logo} className="riot-logo" src={Logo} alt="riot logo" />
 			{shouldIntroExist ? (
-				<section
-					className="intro"
-					style={{ height: "100vh", display: "flex", position: "absolute" }}
-				>
-					<div ref={divOne} className="intro-half-one"></div>
-					<div ref={divTwo} className="intro-half-two"></div>
-				</section>
+				<>
+					<img ref={logo} className="riot-logo" src={Logo} alt="riot logo" />
+					<section
+						className="intro"
+						style={{ height: "100vh", display: "flex", position: "absolute" }}
+					>
+						<div ref={divOne} className="intro-half-one"></div>
+						<div ref={divTwo} className="intro-half-two"></div>
+					</section>
+				</>
 			) : null}
 			{cards}
 		</>
