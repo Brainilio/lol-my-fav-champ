@@ -5,12 +5,17 @@ const Card = (props) => {
 
 	useEffect(() => {
 		setChampion(props.champion)
-	})
+	}, [props.champion])
 
 	return (
 		<>
 			{champion ? (
-				<div className="single-champion">{champion.name}</div>
+				<div
+					onClick={(id) => props.clicked(props.champion._id)}
+					className="single-champion"
+				>
+					{champion.name}
+				</div>
 			) : (
 				<p>Loading... </p>
 			)}

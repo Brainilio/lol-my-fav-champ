@@ -3,18 +3,31 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	margin: 5em auto;
 
 	.card-section {
 		display: grid;
-		grid-template-columns: 1fr 1fr 1fr 1fr;
+		grid-template-columns: 1fr 1fr 1fr;
 		justify-content: center;
+		align-items: center;
 
 		.single-champion {
 			margin: 20px 20px;
-			width: 250px;
-			height: 250px;
-			border: 1px solid #9c4679;
-			align-self: center;
+			width: 200px;
+			height: 200px;
+			border: 3px solid #9c467a30;
+			box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.413);
+			border-radius: 20px;
+			transition: all 0.3s ease-in-out;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			cursor: pointer;
+
+			&:hover {
+				box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.413);
+				scale: 1.1;
+			}
 		}
 	}
 }
