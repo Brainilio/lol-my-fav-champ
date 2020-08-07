@@ -55,11 +55,7 @@ const Cards = () => {
 						: null}
 				</div>
 			</section>
-			{modal ? (
-				<Modal id={modalId} clicked={toggleModal}>
-					<p>Brainilio</p>
-				</Modal>
-			) : null}
+			{modal ? <Modal id={modalId} clicked={toggleModal} /> : null}
 		</>
 	)
 }

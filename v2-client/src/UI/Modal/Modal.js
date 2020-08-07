@@ -1,23 +1,13 @@
 import React, { useState } from "react"
 import Spinner from "../Spinner/Spinner"
 import axios from "../../axios"
+import Backdrop from "../Backdrop/Backdrop"
 import { useCallback } from "react"
 
 const Modal = (props) => {
 	const [champ, setChamp] = useState("")
 	const [riotApiData, setriotApiData] = useState("")
 	const [champImage, setchampImage] = useState("")
-
-	React.useEffect(() => {
-		console.log("Modal present")
-		axios
-			.get(`/${props.id}`)
-			.then((response) => {
-				setChamp(response.data)
-				return response
-			})
-			.then((response) => pullRiotAPIData(response.data.name))
-	}, [props.id])
 
 	const pullRiotAPIData = useCallback((name) => {
 		console.log(name)
@@ -37,6 +27,17 @@ const Modal = (props) => {
 			})
 			.catch((error) => console.log(error))
 	}, [])
+
+	React.useEffect(() => {
+		console.log("Modal present")
+		axios
+			.get(`/${props.id}`)
+			.then((response) => {
+				setChamp(response.data)
+				return response
+			})
+			.then((response) => pullRiotAPIData(response.data.name))
+	}, [props.id, pullRiotAPIData])
 
 	let officialData = null
 	if (riotApiData) {
@@ -61,37 +62,43 @@ const Modal = (props) => {
 	}
 
 	return (
-		<div className="Modal">
-			<span onClick={props.clicked} className="close-modal">
-				X
-			</span>
-			{props.children}
-			{champ ? (
-				<div className="my-information">
-					<h1>My information</h1>
-					<p>
-						{champ.name} & {champ.type} & {champ.lane}{" "}
-					</p>
-					<span>Edit now</span>
-				</div>
-			) : (
-				<Spinner />
-			)}
+		<>
+			<Backdrop show={props.clicked} clicked={props.clicked} />
+			<div className="Modal">
+				<span onClick={props.clicked} className="close-modal">
+					X
+				</span>
+				{props.children}
+				{champ ? (
+					<div className="my-information">
+						<h1>My information</h1>
+						<p>
+							{champ.name} & {champ.type} & {champ.lane}{" "}
+						</p>
+						<span>Edit now</span>
+					</div>
+				) : (
+					<Spinner />
+				)}
 
-			{/* Official information */}
-			{officialData}
-			{/* Image */}
-			{champImage ? (
-				<img
-					className="champion-image"
-					draggable="false"
-					src={champImage}
-					alt="Champion"
-				/>
-			) : (
-				<p>Loading.div..</p>
-			)}
-		</div>
+				{/* Official information */}
+				{officialData}
+				{/* Image */}
+				{champImage ? (
+					<img
+						className="champion-image"
+						draggable="false"
+						src={champImage}
+						alt="Champion"
+					/>
+				) : (
+					<p>
+						Can't find online information on your champion! Is it an existing
+						champion?
+					</p>
+				)}
+			</div>
+		</>
 	)
 }
 
