@@ -35,7 +35,7 @@ const Cards = () => {
 		console.log("toggle project")
 		setModal((prevState) => !prevState)
 		setModalId(id)
-	})
+	}, [])
 
 	return (
 		<>
