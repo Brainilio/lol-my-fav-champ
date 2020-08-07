@@ -5,6 +5,8 @@ import { useCallback } from "react"
 
 const Modal = (props) => {
 	const [champ, setChamp] = useState("")
+	const [riotApiData, setriotApiData] = useState("")
+	const [champImage, setchampImage] = useState("")
 
 	React.useEffect(() => {
 		console.log("Modal present")
@@ -17,14 +19,23 @@ const Modal = (props) => {
 			.then((response) => pullRiotAPIData(response.data.name))
 	}, [props.id])
 
-	const pullRiotAPIData = useCallback(() => {
+	const pullRiotAPIData = useCallback((name) => {
+		console.log(name)
 		axios
 			.get(
-				`http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion/${champ.name}json`
+				`http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion/${name}.json`
 			)
 			.then((response) => {
-				console.log(response)
+				for (const key in response.data.data) {
+					const name = response.data.data[key].name
+					setchampImage(
+						`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`
+					)
+				}
+				setriotApiData(response.data.data)
+				return response
 			})
+			.catch((error) => console.log(error))
 	}, [])
 
 	return (
@@ -37,6 +48,11 @@ const Modal = (props) => {
 				</p>
 			) : (
 				<Spinner />
+			)}
+			{champImage ? (
+				<img src={champImage} alt="Champion" />
+			) : (
+				<p>Loading.div..</p>
 			)}
 		</div>
 	)
