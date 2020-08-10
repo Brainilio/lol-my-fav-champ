@@ -69,23 +69,27 @@ const Modal = (props) => {
 		)
 	}
 
+	// TODO: FOR EACH KEY AND VALUE, MAKE AN INPUT FIELD AND CHANGE IT
 	let iptField = null
 
 	if (champ) {
+		let newArray = []
+		const keys = Object.keys(champ)
 		for (const key in champ) {
-			if (champ[key] === "name" && "type" && "cost" && "lane") {
-				iptField = (
-					<input
-						type="text"
-						key={key}
-						name={key}
-						value={champ[key]}
-						placeholder={key}
-						onChange={() => console.log("Changed")}
-					/>
-				)
-			}
+			newArray.push(champ[key])
 		}
+		let values = newArray.slice(1, 5)
+
+		values.map((value) => {
+			iptField = (
+				<input
+					type="text"
+					onChange={() => console.log("hi")}
+					name={value}
+					value={value}
+				/>
+			)
+		})
 	}
 
 	if (inputField) {
