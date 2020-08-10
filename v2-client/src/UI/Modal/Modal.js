@@ -22,7 +22,7 @@ const Modal = (props) => {
 					const name = response.data.data[key].name
 					setchampImage(
 						`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`
-					).catch((error) => setchampImage(Placeholder))
+					)
 				}
 				setriotApiData(response.data.data)
 				return response
@@ -59,11 +59,15 @@ const Modal = (props) => {
 					<span>{championInfo.name}</span>
 					<span>{championInfo.title}</span>
 					<p>{championInfo.lore}</p>
-					<div>
-						<span>Ally tips:</span>
-						<p>{championInfo.allytips.map((tip) => tip + " ")}</p>
-						<span>Enemy tips:</span>
-						<p>{championInfo.enemytips.map((tip) => tip + " ")}</p>
+					<div className="tips">
+						<div className="allies">
+							<span>Ally tips:</span>
+							<p>{championInfo.allytips.map((tip) => tip + " ")}</p>
+						</div>
+						<div className="enemies">
+							<span>Enemy tips:</span>
+							<p>{championInfo.enemytips.map((tip) => tip + " ")}</p>
+						</div>
 					</div>
 					<span>Data provided by Riot Games</span>
 				</div>
@@ -78,7 +82,7 @@ const Modal = (props) => {
 				<span onClick={props.clicked} className="close-modal">
 					X
 				</span>
-				{props.children}
+
 				{champ ? (
 					<div className="my-information">
 						<h1>My information</h1>
