@@ -47,7 +47,7 @@ const Modal = (props) => {
 			<h1>Couldn't find any official data on your champion!</h1>
 			<span>Does your champion exist?</span>
 			<img src={Gif} alt="Bard floating" />
-			<span>Data provided by Riot Games</span>
+			<span style={{ color: "grey" }}>Data provided by Riot Games</span>
 		</div>
 	)
 	if (riotApiData) {
@@ -56,13 +56,13 @@ const Modal = (props) => {
 
 			officialData = (
 				<div className="official-data">
-					<h1>Official data found on your champion:</h1>
+					<h1>Official RIOT data found about your favorite champion!</h1>
 					<span>{championInfo.name}</span>
 					<span>{championInfo.title}</span>
 					<p>{championInfo.lore}</p>
 					<div className="tips">
 						<div className="allies">
-							<span>Ally tips:</span>
+							<span>Ally tips</span>
 							<ul>
 								{championInfo.allytips.map((tip) => (
 									<li>{tip}</li>
@@ -70,7 +70,7 @@ const Modal = (props) => {
 							</ul>
 						</div>
 						<div className="enemies">
-							<span>Enemy tips:</span>
+							<span>Enemy tips</span>
 							<ul>
 								{championInfo.enemytips.map((tip) => (
 									<li>{tip}</li>
