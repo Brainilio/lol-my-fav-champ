@@ -1,4 +1,6 @@
 import React, { useState } from "react"
+import Placeholder from "../../assets/poro.png"
+import Gif from "../../assets/giphy.gif"
 import Spinner from "../Spinner/Spinner"
 import axios from "../../axios"
 import Backdrop from "../Backdrop/Backdrop"
@@ -20,12 +22,12 @@ const Modal = (props) => {
 					const name = response.data.data[key].name
 					setchampImage(
 						`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`
-					)
+					).catch((e) => setchampImage(e))
 				}
 				setriotApiData(response.data.data)
 				return response
 			})
-			.catch((error) => console.log(error))
+			.catch((error) => setchampImage(Placeholder))
 	}, [])
 
 	React.useEffect(() => {
@@ -39,7 +41,13 @@ const Modal = (props) => {
 			.then((response) => pullRiotAPIData(response.data.name))
 	}, [props.id, pullRiotAPIData])
 
-	let officialData = null
+	let officialData = (
+		<div className="official-data">
+			<h1>Can't find any official data on your champion!</h1>
+			<span>Does your champion exist?</span>
+			<img src={Gif} alt="Bard floating" />
+		</div>
+	)
 	if (riotApiData) {
 		for (const key in riotApiData) {
 			const championInfo = riotApiData[key]
@@ -91,12 +99,7 @@ const Modal = (props) => {
 						src={champImage}
 						alt="Champion"
 					/>
-				) : (
-					<p>
-						Can't find online information on your champion! Is it an existing
-						champion?
-					</p>
-				)}
+				) : null}
 			</div>
 		</>
 	)
