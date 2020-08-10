@@ -22,7 +22,7 @@ const Modal = (props) => {
 					const name = response.data.data[key].name
 					setchampImage(
 						`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`
-					).catch((e) => setchampImage(e))
+					).catch((error) => setchampImage(Placeholder))
 				}
 				setriotApiData(response.data.data)
 				return response
@@ -43,9 +43,10 @@ const Modal = (props) => {
 
 	let officialData = (
 		<div className="official-data">
-			<h1>Can't find any official data on your champion!</h1>
+			<h1>Couldn't find any official data on your champion!</h1>
 			<span>Does your champion exist?</span>
 			<img src={Gif} alt="Bard floating" />
+			<span>Data provided by Riot Games</span>
 		</div>
 	)
 	if (riotApiData) {
@@ -64,6 +65,7 @@ const Modal = (props) => {
 						<span>Enemy tips:</span>
 						<p>{championInfo.enemytips.map((tip) => tip + " ")}</p>
 					</div>
+					<span>Data provided by Riot Games</span>
 				</div>
 			)
 		}

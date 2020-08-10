@@ -120,6 +120,8 @@
 	border-radius: 20px;
 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.297);
 	transition: all 0.3s ease-out;
+	display: flex;
+	flex-direction: column;
 
 	.close-modal {
 		cursor: pointer;
@@ -133,15 +135,15 @@
 		height: 5px;
 	}
 
-	img {
+	img.champion-image {
 		position: absolute;
 		z-index: -1;
 		object-fit: cover;
 		top: 0;
-		left: 0;
-		width: 100%;
+		right: 0;
+		width: 50%;
 		height: 100%;
-		opacity: 65%;
+		opacity: 85%;
 		border-radius: inherit;
 		user-select: none;
 		-moz-user-select: none;
