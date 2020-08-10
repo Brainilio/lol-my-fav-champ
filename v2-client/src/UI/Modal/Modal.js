@@ -4,6 +4,7 @@ import Gif from "../../assets/giphy.gif"
 import Spinner from "../Spinner/Spinner"
 import axios from "../../axios"
 import Backdrop from "../Backdrop/Backdrop"
+import Exit from "../Exit/Exit"
 import { useCallback } from "react"
 
 const Modal = (props) => {
@@ -62,11 +63,19 @@ const Modal = (props) => {
 					<div className="tips">
 						<div className="allies">
 							<span>Ally tips:</span>
-							<p>{championInfo.allytips.map((tip) => tip + " ")}</p>
+							<ul>
+								{championInfo.allytips.map((tip) => (
+									<li>{tip}</li>
+								))}
+							</ul>
 						</div>
 						<div className="enemies">
 							<span>Enemy tips:</span>
-							<p>{championInfo.enemytips.map((tip) => tip + " ")}</p>
+							<ul>
+								{championInfo.enemytips.map((tip) => (
+									<li>{tip}</li>
+								))}
+							</ul>
 						</div>
 					</div>
 					<span>Data provided by Riot Games</span>
@@ -79,10 +88,7 @@ const Modal = (props) => {
 		<>
 			<Backdrop show={props.clicked} clicked={props.clicked} />
 			<div className="Modal">
-				<span onClick={props.clicked} className="close-modal">
-					X
-				</span>
-
+				<Exit clicked={props.clicked} />
 				{champ ? (
 					<div className="my-information">
 						<h1>My information</h1>
