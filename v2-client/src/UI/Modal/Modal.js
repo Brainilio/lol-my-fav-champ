@@ -92,10 +92,14 @@ const Modal = (props) => {
 				{champ ? (
 					<div className="my-information">
 						<h1>My information</h1>
-						<p>
-							{champ.name} & {champ.type} & {champ.lane}{" "}
-						</p>
-						<span>Edit now</span>
+						<span>{champ.name}</span>
+						<span>{champ.type}</span>
+						<span>{champ.lane}</span>
+						<span>{champ.cost}</span>
+						<div className="clickables">
+							<span class="material-icons">delete</span>
+							<span class="material-icons">edit</span>
+						</div>
 					</div>
 				) : (
 					<Spinner />

@@ -97,6 +97,18 @@
 	}
 }
 
+.my-information-styling {
+	background-color: rgb(75, 75, 220);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.502);
+	color: white;
+	font-size: 20px;
+	margin: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 25%;
+	height: 10%;
+}
 .Backdrop {
 	position: fixed;
 	height: 100%;
@@ -136,6 +148,33 @@
 		width: 50%;
 		background-color: WHITE;
 		height: 35%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		span:nth-child(2) {
+			@extend .my-information-styling;
+		}
+		span:nth-child(3) {
+			@extend .my-information-styling;
+		}
+		span:nth-child(4) {
+			@extend .my-information-styling;
+		}
+		span:nth-child(5) {
+			@extend .my-information-styling;
+		}
+
+		.clickables {
+			display: flex;
+			margin: 20px;
+
+			span {
+				font-size: 50px;
+				color: black;
+			}
+		}
 	}
 
 	.official-data {
