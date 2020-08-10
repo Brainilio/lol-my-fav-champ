@@ -89,24 +89,28 @@ const Modal = (props) => {
 			<Backdrop show={props.clicked} clicked={props.clicked} />
 			<div className="Modal">
 				<Exit clicked={props.clicked} />
-				{champ ? (
-					<div className="my-information">
-						<h1>My information</h1>
-						<span>{champ.name}</span>
-						<span>{champ.type}</span>
-						<span>{champ.lane}</span>
-						<span>{champ.cost}</span>
-						<div className="clickables">
-							<span class="material-icons">delete</span>
-							<span class="material-icons">edit</span>
-						</div>
-					</div>
-				) : (
-					<Spinner />
-				)}
 
-				{/* Official information */}
-				{officialData}
+				<div className="information-general">
+					{champ ? (
+						<div className="my-information">
+							<h1>My information</h1>
+							<span>{champ.name}</span>
+							<span>{champ.type}</span>
+							<span>{champ.lane}</span>
+							<span>{champ.cost}</span>
+							<div className="clickables">
+								<button class="material-icons">edit</button>
+								<button class="material-icons">delete</button>
+							</div>
+						</div>
+					) : (
+						<Spinner />
+					)}
+
+					{/* Official information */}
+					{officialData}
+				</div>
+
 				{/* Image */}
 				{champImage ? (
 					<img

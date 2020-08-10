@@ -132,6 +132,7 @@
 	border-radius: 20px;
 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.297);
 	transition: all 0.3s ease-out;
+	display: flex;
 
 	.close-modal {
 		cursor: pointer;
@@ -144,105 +145,133 @@
 		height: 5px;
 	}
 
-	.my-information {
-		width: 50%;
-		background-color: WHITE;
-		height: 35%;
+	.information-general {
+		width: 100%;
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
-
-		span:nth-child(2) {
-			@extend .my-information-styling;
-		}
-		span:nth-child(3) {
-			@extend .my-information-styling;
-		}
-		span:nth-child(4) {
-			@extend .my-information-styling;
-		}
-		span:nth-child(5) {
-			@extend .my-information-styling;
-		}
-
-		.clickables {
+		.my-information {
+			width: 40%;
+			height: 40%;
+			border-radius: 5%;
+			background-color: WHITE;
 			display: flex;
-			margin: 20px;
-
-			span {
-				font-size: 50px;
-				color: black;
-			}
-		}
-	}
-
-	.official-data {
-		flex: 3;
-		position: absolute;
-		bottom: 0;
-		width: 50%;
-		background: white;
-		border-radius: 5%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-self: flex-end;
-
-		h1 {
-			text-align: center;
-			color: rgb(140, 46, 98);
-		}
-
-		span:nth-child(2) {
-			font-size: 35px;
-		}
-		span:nth-child(3) {
-			font-size: 20px;
-		}
-		p {
-			width: 85%;
-			height: 25%;
-		}
-
-		.tips {
-			width: 100%;
-			margin: 0 20;
-			display: flex;
+			flex-direction: column;
 			justify-content: center;
-			align-items: baseline;
+			align-items: center;
 
-			.allies {
-				width: 50%;
-				span {
-					font-size: 25px;
-					text-align: center;
-					color: rgb(51, 132, 51);
-				}
-
-				p {
-					color: grey;
-					width: 100%;
-				}
+			span:nth-child(2) {
+				@extend .my-information-styling;
+			}
+			span:nth-child(3) {
+				@extend .my-information-styling;
+			}
+			span:nth-child(4) {
+				@extend .my-information-styling;
+			}
+			span:nth-child(5) {
+				@extend .my-information-styling;
 			}
 
-			.enemies {
-				width: 50%;
-				span {
-					font-size: 25px;
+			.clickables {
+				display: flex;
+				margin: 20px;
+
+				button {
+					width: 50px;
+					height: 50px;
+					margin: 0 20px;
 					text-align: center;
-					color: rgb(171, 50, 50);
+					border-radius: 50%;
+					cursor: pointer;
+					transition: all 0.3s ease-in-out;
+
+					&:nth-child(1) {
+						color: rgb(50, 50, 50);
+						background-color: rgb(232, 187, 111);
+						border: none;
+						box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.509);
+					}
+					&:nth-child(2) {
+						color: rgb(255, 255, 255);
+						background-color: rgb(164, 40, 27);
+						border: NONE;
+						box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.509);
+					}
+
+					&:hover {
+						border: none;
+						box-shadow: 5px 5px 5px rgba(94, 94, 94, 0.537);
+					}
 				}
-				p {
-					color: grey;
-					width: 100%;
+			}
+		}
+
+		.official-data {
+			width: 40%;
+			height: 40%;
+			border-radius: 5%;
+
+			background: white;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-self: flex-end;
+
+			h1 {
+				text-align: center;
+				color: rgb(140, 46, 98);
+			}
+
+			span:nth-child(2) {
+				font-size: 35px;
+			}
+			span:nth-child(3) {
+				font-size: 20px;
+			}
+			p {
+				width: 85%;
+				height: 25%;
+			}
+
+			.tips {
+				width: 100%;
+				margin: 0 20;
+				display: flex;
+				justify-content: center;
+				align-items: baseline;
+
+				.allies {
+					width: 50%;
+					span {
+						font-size: 25px;
+						text-align: center;
+						color: rgb(51, 132, 51);
+					}
+
+					p {
+						color: grey;
+						width: 100%;
+					}
+				}
+
+				.enemies {
+					width: 50%;
+					span {
+						font-size: 25px;
+						text-align: center;
+						color: rgb(171, 50, 50);
+					}
+					p {
+						color: grey;
+						width: 100%;
+					}
 				}
 			}
 		}
 	}
 
 	img.champion-image {
-		position: absolute;
 		z-index: -1;
 		object-fit: cover;
 		top: 0;
