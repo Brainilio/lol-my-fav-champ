@@ -11,6 +11,7 @@ const Modal = (props) => {
 	const [champ, setChamp] = useState("")
 	const [riotApiData, setriotApiData] = useState("")
 	const [champImage, setchampImage] = useState("")
+	const [inputField, setinputField] = useState(false)
 
 	const pullRiotAPIData = useCallback((name) => {
 		console.log(name)
@@ -42,6 +43,62 @@ const Modal = (props) => {
 			.then((response) => pullRiotAPIData(response.data.name))
 	}, [props.id, pullRiotAPIData])
 
+	let championData = <Spinner />
+
+	if (champ) {
+		championData = (
+			<div className="my-information">
+				<h1>My information</h1>
+				<span>{champ.name}</span>
+				<span>{champ.type}</span>
+				<span>{champ.lane}</span>
+				<span>{champ.cost}</span>
+				<div className="clickables">
+					<button
+						className="material-icons"
+						onClick={() => {
+							console.log("clicked")
+							return setinputField((prev) => !prev)
+						}}
+					>
+						edit
+					</button>
+					<button className="material-icons">delete</button>
+				</div>
+			</div>
+		)
+	}
+
+	let iptField = null
+
+	if (champ) {
+		for (const key in champ) {
+			if (champ[key] === "name" && "type" && "cost" && "lane") {
+				iptField = (
+					<input
+						type="text"
+						key={key}
+						name={key}
+						value={champ[key]}
+						placeholder={key}
+						onChange={() => console.log("Changed")}
+					/>
+				)
+			}
+		}
+	}
+
+	if (inputField) {
+		championData = (
+			<form>
+				{iptField}
+				<button type="submit" onClick={() => setinputField((prev) => !prev)}>
+					Go back
+				</button>
+			</form>
+		)
+	}
+
 	let officialData = (
 		<div className="official-data">
 			<h1>Couldn't find any official data on your champion!</h1>
@@ -50,6 +107,7 @@ const Modal = (props) => {
 			<span style={{ color: "grey" }}>Data provided by Riot Games</span>
 		</div>
 	)
+
 	if (riotApiData) {
 		for (const key in riotApiData) {
 			const championInfo = riotApiData[key]
@@ -65,7 +123,7 @@ const Modal = (props) => {
 							<span>Ally tips</span>
 							<ul>
 								{championInfo.allytips.map((tip) => (
-									<li>{tip}</li>
+									<li key={tip}>{tip}</li>
 								))}
 							</ul>
 						</div>
@@ -73,7 +131,7 @@ const Modal = (props) => {
 							<span>Enemy tips</span>
 							<ul>
 								{championInfo.enemytips.map((tip) => (
-									<li>{tip}</li>
+									<li key={tip}>{tip}</li>
 								))}
 							</ul>
 						</div>
@@ -91,22 +149,7 @@ const Modal = (props) => {
 				<Exit clicked={props.clicked} />
 
 				<div className="information-general">
-					{champ ? (
-						<div className="my-information">
-							<h1>My information</h1>
-							<span>{champ.name}</span>
-							<span>{champ.type}</span>
-							<span>{champ.lane}</span>
-							<span>{champ.cost}</span>
-							<div className="clickables">
-								<button class="material-icons">edit</button>
-								<button class="material-icons">delete</button>
-							</div>
-						</div>
-					) : (
-						<Spinner />
-					)}
-
+					{championData}
 					{/* Official information */}
 					{officialData}
 				</div>
