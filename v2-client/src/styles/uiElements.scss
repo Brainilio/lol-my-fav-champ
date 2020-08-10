@@ -136,6 +136,7 @@
 	}
 
 	.official-data {
+		flex: 3;
 		position: absolute;
 		bottom: 0;
 		width: 50%;
@@ -158,28 +159,41 @@
 			font-size: 20px;
 		}
 		p {
-			width: 50%;
+			width: 85%;
+			height: 25%;
 		}
 
 		.tips {
 			width: 100%;
+			margin: 0 20;
 			display: flex;
 			justify-content: center;
-			align-items: center;
+			align-items: baseline;
 
 			.allies {
+				width: 50%;
 				span {
 					font-size: 25px;
 					text-align: center;
 					color: rgb(51, 132, 51);
 				}
+
+				p {
+					color: grey;
+					width: 100%;
+				}
 			}
 
 			.enemies {
+				width: 50%;
 				span {
 					font-size: 25px;
 					text-align: center;
 					color: rgb(171, 50, 50);
+				}
+				p {
+					color: grey;
+					width: 100%;
 				}
 			}
 		}
