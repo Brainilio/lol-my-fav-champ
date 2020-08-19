@@ -24,11 +24,6 @@ const Cards = () => {
 				setLoader(false)
 				console.log(error)
 			})
-		// axios
-		// 	.get(
-		// 		"http://ddragon.leagueoflegends.com/cdn/6.24.1/data/en_US/champion.json"
-		// 	)
-		// 	.then((res) => console.log(res.data))
 	}, [])
 
 	const toggleModal = useCallback((id) => {
@@ -36,6 +31,16 @@ const Cards = () => {
 		setModal((prevState) => !prevState)
 		setModalId(id)
 	}, [])
+
+	const editChampion = useCallback((champData) => {
+		console.log(champData)
+		axiosAPI.put(`/` + champData.champId, {
+			name: champData.name,
+			type: champData.type,
+			lane: champData.lane,
+			cost: champData.cost,
+		})
+	})
 
 	return (
 		<>
@@ -55,7 +60,13 @@ const Cards = () => {
 						: null}
 				</div>
 			</section>
-			{modal ? <Modal id={modalId} clicked={toggleModal} /> : null}
+			{modal ? (
+				<Modal
+					id={modalId}
+					clicked={toggleModal}
+					editThisChamp={editChampion}
+				/>
+			) : null}
 		</>
 	)
 }

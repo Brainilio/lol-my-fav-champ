@@ -12,6 +12,7 @@ const Modal = (props) => {
 	const [riotApiData, setriotApiData] = useState("")
 	const [champImage, setchampImage] = useState("")
 	const [inputField, setinputField] = useState(false)
+	const [editedChamp, setEditedChamp] = useState("")
 
 	const pullRiotAPIData = useCallback((name) => {
 		console.log(name)
@@ -31,6 +32,22 @@ const Modal = (props) => {
 			})
 			.catch((error) => setchampImage(Placeholder))
 	}, [])
+
+	const editChamp = (event) => {
+		event.preventDefault()
+		console.log(editedChamp)
+		props.editThisChamp(editedChamp)
+	}
+
+	const setEditChamp = (value, event) => {
+		let name = event.target.value
+		setEditedChamp((prevState) => ({
+			...prevState,
+			champId: champ._id,
+			champName: champ.name,
+			[value]: name,
+		}))
+	}
 
 	React.useEffect(() => {
 		console.log("Modal present")
@@ -70,34 +87,26 @@ const Modal = (props) => {
 	}
 
 	// TODO: FOR EACH KEY AND VALUE, MAKE AN INPUT FIELD AND CHANGE IT
-	let iptField = null
-
-	if (champ) {
-		let newArray = []
-		const keys = Object.keys(champ)
-		for (const key in champ) {
-			newArray.push(champ[key])
-		}
-		let values = newArray.slice(1, 5)
-
-		values.map((value) => {
-			iptField = (
-				<input
-					type="text"
-					onChange={() => console.log("hi")}
-					name={value}
-					value={value}
-				/>
-			)
-		})
-	}
+	let iptField = [null]
 
 	if (inputField) {
+		const keys = Object.keys(champ)
+		let values = keys.slice(1, 5)
+
 		championData = (
 			<form>
-				{iptField}
-				<button type="submit" onClick={() => setinputField((prev) => !prev)}>
-					Go back
+				{values.map((value) => (
+					<input
+						key={champ[value]}
+						value={editedChamp[value]}
+						name={champ[value]}
+						placeholder={champ[value]}
+						onChange={(event) => setEditChamp(value, event)}
+					/>
+				))}
+				<button onClick={() => setinputField((prev) => !prev)}>Go back</button>
+				<button type="submit" onClick={(event) => editChamp(event)}>
+					Edit champ
 				</button>
 			</form>
 		)
