@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useCallback } from "react"
+import ChampDetail from "../components/ChampDetail/ChampDetail"
 import axiosAPI from "../axios"
 // import axios from "axios"
 import Spinner from "../UI/Spinner/Spinner"
@@ -65,6 +66,19 @@ const Cards = () => {
 
 	return (
 		<>
+			<h1
+				style={{
+					textAlign: "center",
+					marginTop: "25px",
+				}}
+				className="title-card-page"
+			>
+				My League of Legends Champions:
+			</h1>
+			<div className="action-buttons">
+				<div>Change layout</div>
+				<div>Add Champion</div>
+			</div>
 			<section className="card-page">
 				{loader ? <Spinner /> : null}
 				<div className="card-section">
@@ -82,12 +96,13 @@ const Cards = () => {
 				</div>
 			</section>
 			{modal ? (
-				<Modal
-					id={modalId}
-					clicked={toggleModal}
-					editThisChamp={editChampion}
-					deleteChamp={deleteChampion}
-				/>
+				<Modal clicked={toggleModal}>
+					<ChampDetail
+						id={modalId}
+						editThisChamp={editChampion}
+						deleteChamp={deleteChampion}
+					/>
+				</Modal>
 			) : null}
 		</>
 	)

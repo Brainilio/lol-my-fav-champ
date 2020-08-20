@@ -1,3 +1,19 @@
+.action-buttons {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	div {
+		font-size: 25px;
+		cursor: pointer;
+		margin: 20px;
+	}
+
+	// div:nth-child(1) {
+	// 	background-color: red;
+	// }
+}
+
 .card-page {
 	width: 100vw;
 	display: flex;
