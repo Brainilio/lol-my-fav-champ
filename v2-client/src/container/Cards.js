@@ -29,7 +29,7 @@ const Cards = () => {
 				setLoader(false)
 				console.log(error)
 			})
-	})
+	}, [])
 
 	const toggleModal = useCallback((id) => {
 		console.log("toggle project")
@@ -51,7 +51,7 @@ const Cards = () => {
 			.then(() => {
 				setModal(false)
 			})
-	})
+	}, [])
 
 	const deleteChampion = useCallback((champId) => {
 		axiosAPI
@@ -62,7 +62,7 @@ const Cards = () => {
 			.then(() => {
 				setModal(false)
 			})
-	})
+	}, [])
 
 	return (
 		<>

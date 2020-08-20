@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from "react"
-import Logo from "./assets/riot.png"
+import Logo from "../assets/riot.png"
 import { gsap } from "gsap"
-import Cards from "./container/Cards"
+import Cards from "./Cards"
 
 function App() {
 	const divOne = useRef(null)
