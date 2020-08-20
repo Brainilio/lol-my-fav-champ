@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useCallback } from "react"
 import ChampDetail from "../components/ChampDetail/ChampDetail"
 import axiosAPI from "../axios"
-// import axios from "axios"
 import Spinner from "../UI/Spinner/Spinner"
 import Card from "../components/Card/Card"
+import AddChamp from "../components/AddChamp/AddChamp"
 import Modal from "../UI/Modal/Modal"
 
 const Cards = () => {
 	const [cards, setCards] = useState(null)
 	const [loader, setLoader] = useState(false)
 	const [modal, setModal] = useState(false)
+	const [addChamp, setAddChamp] = useState(false)
 	const [modalId, setModalId] = useState(null)
 
 	useEffect(() => {
@@ -35,6 +36,10 @@ const Cards = () => {
 		console.log("toggle project")
 		setModal((prevState) => !prevState)
 		setModalId(id)
+	}, [])
+
+	const closeFormForAdding = useCallback(() => {
+		setAddChamp((prevState) => !prevState)
 	}, [])
 
 	const editChampion = useCallback((champData) => {
@@ -77,7 +82,9 @@ const Cards = () => {
 			</h1>
 			<div className="action-buttons">
 				<div>Change layout</div>
-				<div>Add Champion</div>
+				<div onClick={() => setAddChamp((prevState) => !prevState)}>
+					Add Champion
+				</div>
 			</div>
 			<section className="card-page">
 				{loader ? <Spinner /> : null}
@@ -95,6 +102,11 @@ const Cards = () => {
 						: null}
 				</div>
 			</section>
+			{addChamp ? (
+				<Modal clicked={closeFormForAdding}>
+					<AddChamp />
+				</Modal>
+			) : null}
 			{modal ? (
 				<Modal clicked={toggleModal}>
 					<ChampDetail
