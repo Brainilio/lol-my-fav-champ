@@ -13,7 +13,11 @@ const Cards = () => {
 
 	useEffect(() => {
 		console.log("render cards")
+		pullChampions()
 		setLoader(true)
+	}, [])
+
+	const pullChampions = useCallback(() => {
 		axiosAPI
 			.get()
 			.then((response) => {
@@ -24,7 +28,7 @@ const Cards = () => {
 				setLoader(false)
 				console.log(error)
 			})
-	}, [])
+	})
 
 	const toggleModal = useCallback((id) => {
 		console.log("toggle project")
@@ -34,12 +38,21 @@ const Cards = () => {
 
 	const editChampion = useCallback((champData) => {
 		console.log(champData)
-		axiosAPI.put(`/` + champData.champId, {
-			name: champData.name,
-			type: champData.type,
-			lane: champData.lane,
-			cost: champData.cost,
-		})
+		setLoader(true)
+		axiosAPI
+			.put(`/` + champData.champId, {
+				name: champData.name,
+				type: champData.type,
+				lane: champData.lane,
+				cost: champData.cost,
+			})
+			.then(() => {
+				pullChampions()
+			})
+			.then(() => {
+				setLoader(false)
+				setModal(false)
+			})
 	})
 
 	return (
