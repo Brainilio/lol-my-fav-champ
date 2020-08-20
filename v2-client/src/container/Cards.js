@@ -37,8 +37,6 @@ const Cards = () => {
 	}, [])
 
 	const editChampion = useCallback((champData) => {
-		console.log(champData)
-		setLoader(true)
 		axiosAPI
 			.put(`/` + champData.champId, {
 				name: champData.name,
@@ -50,7 +48,17 @@ const Cards = () => {
 				pullChampions()
 			})
 			.then(() => {
-				setLoader(false)
+				setModal(false)
+			})
+	})
+
+	const deleteChampion = useCallback((champId) => {
+		axiosAPI
+			.delete("/" + champId)
+			.then(() => {
+				pullChampions()
+			})
+			.then(() => {
 				setModal(false)
 			})
 	})
@@ -78,6 +86,7 @@ const Cards = () => {
 					id={modalId}
 					clicked={toggleModal}
 					editThisChamp={editChampion}
+					deleteChamp={deleteChampion}
 				/>
 			) : null}
 		</>

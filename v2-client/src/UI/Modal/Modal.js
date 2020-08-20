@@ -74,13 +74,17 @@ const Modal = (props) => {
 					<button
 						className="material-icons"
 						onClick={() => {
-							console.log("clicked")
 							return setinputField((prev) => !prev)
 						}}
 					>
 						edit
 					</button>
-					<button className="material-icons">delete</button>
+					<button
+						className="material-icons"
+						onClick={() => props.deleteChamp(champ._id)}
+					>
+						delete
+					</button>
 				</div>
 			</div>
 		)
