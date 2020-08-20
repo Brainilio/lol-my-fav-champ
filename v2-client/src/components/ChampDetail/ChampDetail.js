@@ -3,6 +3,7 @@ import Placeholder from "../../assets/poro.png"
 import Gif from "../../assets/giphy.gif"
 import Spinner from "../../UI/Spinner/Spinner"
 import axios from "../../axios"
+import Exit from "../../UI/Exit/Exit"
 import { useCallback } from "react"
 
 const ChampDetail = (props) => {
@@ -87,9 +88,6 @@ const ChampDetail = (props) => {
 			</div>
 		)
 	}
-
-	// TODO: FOR EACH KEY AND VALUE, MAKE AN INPUT FIELD AND CHANGE IT
-	let iptField = [null]
 
 	if (inputField) {
 		const keys = Object.keys(champ)

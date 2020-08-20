@@ -1,0 +1,228 @@
+.champ-details {
+	z-index: 5;
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	margin: 0 auto;
+	width: 90%;
+	height: 95%;
+	background: linear-gradient(rgb(75, 75, 220), rgb(134, 134, 228));
+
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.297);
+	transition: all 0.3s ease-out;
+	display: flex;
+
+	.close-modal {
+		cursor: pointer;
+		position: absolute;
+		right: 15px;
+		top: 5px;
+		text-transform: lowercase;
+		font-size: 45px;
+		width: 25px;
+		height: 5px;
+	}
+
+	.information-general {
+		width: 100%;
+		height: 100%;
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+
+		.my-information {
+			width: 45%;
+			border-radius: 5%;
+			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
+			background-color: WHITE;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+
+			span:nth-child(2) {
+				@extend .my-information-styling;
+			}
+			span:nth-child(3) {
+				@extend .my-information-styling;
+			}
+			span:nth-child(4) {
+				@extend .my-information-styling;
+			}
+			span:nth-child(5) {
+				@extend .my-information-styling;
+			}
+
+			.clickables {
+				display: flex;
+				margin: 20px;
+
+				button {
+					width: 50px;
+					height: 50px;
+					margin: 0 20px;
+					text-align: center;
+					border-radius: 50%;
+					cursor: pointer;
+					transition: all 0.3s ease-in-out;
+
+					&:nth-child(1) {
+						color: rgb(50, 50, 50);
+						background-color: rgb(232, 187, 111);
+						border: none;
+						box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.509);
+					}
+					&:nth-child(2) {
+						color: rgb(255, 255, 255);
+						background-color: rgb(164, 40, 27);
+						border: NONE;
+						box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.509);
+					}
+
+					&:hover {
+						border: none;
+						box-shadow: 5px 5px 5px rgba(94, 94, 94, 0.537);
+					}
+				}
+			}
+		}
+
+		.official-data {
+			border-radius: 5%;
+			width: 75%;
+			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
+
+			background: white;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-self: flex-end;
+			margin-top: 25px;
+
+			h1 {
+				text-align: center;
+				font-size: 15px;
+				color: rgb(140, 46, 98);
+			}
+
+			span:nth-child(2) {
+				font-size: 40px;
+			}
+			span:nth-child(3) {
+				font-size: 20px;
+				color: rgb(138, 138, 138);
+			}
+
+			span:nth-child(6) {
+				margin: 10px;
+				color: rgba(159, 159, 159, 0.598);
+			}
+
+			p {
+				width: 85%;
+				height: 25%;
+			}
+
+			.tips {
+				margin-top: 30px;
+				width: 85%;
+				margin: 0 20;
+				display: flex;
+				justify-content: center;
+				align-items: baseline;
+
+				.allies {
+					width: 50%;
+					height: 100%;
+					background-color: rgb(162, 220, 137);
+					border-radius: 5%;
+					margin-right: 20px;
+					display: flex;
+					flex-direction: column;
+
+					span {
+						margin-top: 5px;
+						font-size: 25px;
+						text-align: center;
+						color: rgb(54, 116, 54);
+						text-transform: uppercase;
+						font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
+							sans-serif;
+					}
+					ul {
+						list-style: lower-greek;
+					}
+
+					li {
+						color: rgb(35, 82, 22);
+						width: 100%;
+						font-size: 15px;
+						margin: 5px;
+					}
+				}
+
+				.enemies {
+					display: flex;
+					flex-direction: column;
+
+					width: 50%;
+					height: 100%;
+					background-color: rgb(213, 92, 92);
+					border-radius: 5%;
+					span {
+						margin-top: 5px;
+						font-size: 25px;
+						text-align: center;
+						text-transform: uppercase;
+						font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
+							sans-serif;
+						color: rgb(252, 190, 190);
+					}
+
+					ul {
+						list-style: lower-greek;
+					}
+
+					li {
+						color: rgb(52, 41, 41);
+						width: 100%;
+					}
+				}
+			}
+		}
+	}
+
+	img.champion-image {
+		z-index: -1;
+		object-fit: cover;
+		top: 0;
+		right: 0;
+		width: 50%;
+		height: 100%;
+		opacity: 85%;
+		border-end-end-radius: inherit;
+		border-top-right-radius: inherit;
+
+		user-select: none;
+		-moz-user-select: none;
+		-webkit-user-drag: none;
+		-webkit-user-select: none;
+		-ms-user-select: none;
+	}
+}
+
+.my-information-styling {
+	background-color: rgb(75, 75, 220);
+	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.502);
+	color: white;
+	font-size: 20px;
+	margin: 5px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 60%;
+	height: 10%;
+}

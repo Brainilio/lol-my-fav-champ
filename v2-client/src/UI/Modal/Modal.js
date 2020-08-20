@@ -17,8 +17,11 @@ class Modal extends Component {
 		return (
 			<>
 				<Backdrop show={this.props.clicked} clicked={this.props.clicked} />
-				<Exit clicked={this.props.clicked} />
-				<div className="Modal">{this.props.children}</div>
+
+				<div className="Modal">
+					<Exit clicked={this.props.clicked} />
+					{this.props.children}
+				</div>
 			</>
 		)
 	}
