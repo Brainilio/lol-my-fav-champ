@@ -12,6 +12,7 @@ const Cards = () => {
 	const [detailChamp, setDetailChamp] = useState(false)
 	const [addChamp, setAddChamp] = useState(false)
 	const [champId, setChampId] = useState(null)
+	const [succesMessage, setSuccessMessage] = useState(false)
 
 	useEffect(() => {
 		console.log("render cards")
@@ -70,6 +71,11 @@ const Cards = () => {
 	const addChampion = useCallback((championData, event) => {
 		event.preventDefault()
 		console.log(championData)
+		axiosAPI
+			.post("/", championData)
+			.then((response) => setSuccessMessage((prev) => !prev))
+			.then(() => setAddChamp(false))
+			.then(() => pullChampions())
 	})
 
 	return (
@@ -83,6 +89,15 @@ const Cards = () => {
 			>
 				My League of Legends Champions:
 			</h1>
+
+			{succesMessage ? (
+				<h1
+					style={{ color: "green", textAlign: "center" }}
+					onClick={() => setSuccessMessage((prev) => !prev)}
+				>
+					Succesfully added your champion!
+				</h1>
+			) : null}
 			<div className="action-buttons">
 				<div>Change layout</div>
 				<div onClick={() => setAddChamp((prevState) => !prevState)}>
@@ -107,7 +122,7 @@ const Cards = () => {
 			</section>
 			{addChamp ? (
 				<Modal clicked={closeFormForAdding}>
-					<AddChamp />
+					<AddChamp clicked={addChampion} />
 				</Modal>
 			) : null}
 			{detailChamp ? (

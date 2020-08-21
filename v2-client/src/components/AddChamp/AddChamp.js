@@ -9,7 +9,12 @@ const AddChamp = (props) => {
 	})
 
 	const addChampHandler = (e, val) => {
-		console.log(e.target.value, val)
+		let value = e.target.value
+		let field = val
+		setChampToAdd((prevState) => ({
+			...prevState,
+			[field]: value,
+		}))
 	}
 
 	const fields = Object.keys(champToAdd)
