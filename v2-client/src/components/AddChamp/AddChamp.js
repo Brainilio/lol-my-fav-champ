@@ -29,8 +29,9 @@ const AddChamp = (props) => {
 						/>
 					</>
 				))}
-
-				<button type="submit">Add Champ</button>
+				<button type="submit" onClick={(e) => props.clicked(champToAdd, e)}>
+					Add Champ
+				</button>
 			</form>
 		</>
 	)

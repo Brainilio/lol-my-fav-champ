@@ -34,7 +34,6 @@ const ChampDetail = (props) => {
 
 	const editChamp = (event) => {
 		event.preventDefault()
-		console.log(editedChamp)
 		props.editThisChamp(champ)
 	}
 

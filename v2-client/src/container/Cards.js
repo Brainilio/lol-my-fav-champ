@@ -67,6 +67,11 @@ const Cards = () => {
 			})
 	}, [])
 
+	const addChampion = useCallback((championData, event) => {
+		event.preventDefault()
+		console.log(championData)
+	})
+
 	return (
 		<>
 			<h1
