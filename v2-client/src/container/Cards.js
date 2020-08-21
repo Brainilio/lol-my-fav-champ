@@ -79,6 +79,11 @@ const Cards = () => {
 			.then(() => pullChampions())
 	}
 
+	const cardSectionClasses = ["card-section"]
+	if (cardLayout) {
+		cardSectionClasses.push("long-card-section")
+	}
+
 	return (
 		<>
 			<h1
@@ -109,7 +114,7 @@ const Cards = () => {
 			</div>
 			{loader ? <Spinner /> : null}
 			<section className="card-page">
-				<div className="card-section">
+				<div className={cardSectionClasses.join(" ")}>
 					{cards
 						? cards.map((champion) => {
 								return (

@@ -9,8 +9,6 @@ const Card = (props) => {
 		classes.push("long-cards")
 	}
 
-	console.log(classes)
-
 	useEffect(() => {
 		setChampion(props.champion)
 	}, [props.champion])

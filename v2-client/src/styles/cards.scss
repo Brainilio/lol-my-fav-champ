@@ -45,10 +45,17 @@
 				scale: 1.1;
 			}
 		}
+	}
+
+	.long-card-section {
+		display: flex;
+
+		justify-content: center;
+		align-items: center;
 
 		.long-cards {
-			height: 380px;
-			width: 250px;
+			height: 600px;
+			width: 350px;
 		}
 	}
 }
