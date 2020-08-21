@@ -13,6 +13,7 @@ const Cards = () => {
 	const [addChamp, setAddChamp] = useState(false)
 	const [champId, setChampId] = useState(null)
 	const [succesMessage, setSuccessMessage] = useState(false)
+	const [cardLayout, setCardLayout] = useState(false)
 
 	useEffect(() => {
 		console.log("render cards")
@@ -99,19 +100,22 @@ const Cards = () => {
 				</h1>
 			) : null}
 			<div className="action-buttons">
-				<div>Change layout</div>
+				<div onClick={() => setCardLayout((prevstate) => !prevstate)}>
+					Change layout
+				</div>
 				<div onClick={() => setAddChamp((prevState) => !prevState)}>
 					Add Champion
 				</div>
 			</div>
+			{loader ? <Spinner /> : null}
 			<section className="card-page">
-				{loader ? <Spinner /> : null}
 				<div className="card-section">
 					{cards
 						? cards.map((champion) => {
 								return (
 									<Card
 										key={champion._id}
+										layout={cardLayout}
 										clicked={toggleModal}
 										champion={champion}
 									/>

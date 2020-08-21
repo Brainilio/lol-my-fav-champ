@@ -3,6 +3,14 @@ import React, { useEffect, useState } from "react"
 const Card = (props) => {
 	const [champion, setChampion] = useState(null)
 
+	const classes = ["single-champion"]
+
+	if (props.layout) {
+		classes.push("long-cards")
+	}
+
+	console.log(classes)
+
 	useEffect(() => {
 		setChampion(props.champion)
 	}, [props.champion])
@@ -12,7 +20,7 @@ const Card = (props) => {
 			{champion ? (
 				<div
 					onClick={(id) => props.clicked(props.champion._id)}
-					className="single-champion"
+					className={classes.join(" ")}
 				>
 					{champion.name}
 				</div>
