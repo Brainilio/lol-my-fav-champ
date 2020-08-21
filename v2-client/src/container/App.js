@@ -9,7 +9,7 @@ function App() {
 	const logo = useRef(null)
 
 	// get rid of dom elements after loader is over
-	const [shouldIntroExist, setShouldIntroExist] = useState(true)
+	const [shouldIntroExist, setShouldIntroExist] = useState(false)
 
 	useEffect(() => {
 		console.log("I'm re-rendering!")

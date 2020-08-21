@@ -35,15 +35,14 @@ const ChampDetail = (props) => {
 	const editChamp = (event) => {
 		event.preventDefault()
 		console.log(editedChamp)
-		props.editThisChamp(editedChamp)
+		props.editThisChamp(champ)
 	}
 
 	const setEditChamp = (value, event) => {
+		console.log(event.target.value)
 		let name = event.target.value
-		setEditedChamp((prevState) => ({
+		setChamp((prevState) => ({
 			...prevState,
-			champId: champ._id,
-			champName: champ.name,
 			[value]: name,
 		}))
 	}
@@ -98,9 +97,8 @@ const ChampDetail = (props) => {
 				{values.map((value) => (
 					<input
 						key={champ[value]}
-						value={editedChamp[value]}
+						value={champ[value]}
 						name={champ[value]}
-						placeholder={champ[value]}
 						onChange={(event) => setEditChamp(value, event)}
 					/>
 				))}

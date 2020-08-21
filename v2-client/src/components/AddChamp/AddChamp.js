@@ -7,6 +7,7 @@ const AddChamp = (props) => {
 			<input type="text" name="type" value />
 			<input type="text" name="lane" value />
 			<input type="number" name="cost" value />
+			<button type="submit" />
 		</form>
 	)
 }

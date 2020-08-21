@@ -9,9 +9,9 @@ import Modal from "../UI/Modal/Modal"
 const Cards = () => {
 	const [cards, setCards] = useState(null)
 	const [loader, setLoader] = useState(false)
-	const [modal, setModal] = useState(false)
+	const [detailChamp, setDetailChamp] = useState(false)
 	const [addChamp, setAddChamp] = useState(false)
-	const [modalId, setModalId] = useState(null)
+	const [champId, setChampId] = useState(null)
 
 	useEffect(() => {
 		console.log("render cards")
@@ -34,8 +34,8 @@ const Cards = () => {
 
 	const toggleModal = useCallback((id) => {
 		console.log("toggle project")
-		setModal((prevState) => !prevState)
-		setModalId(id)
+		setDetailChamp((prevState) => !prevState)
+		setChampId(id)
 	}, [])
 
 	const closeFormForAdding = useCallback(() => {
@@ -44,7 +44,7 @@ const Cards = () => {
 
 	const editChampion = useCallback((champData) => {
 		axiosAPI
-			.put(`/` + champData.champId, {
+			.put(`/` + champData._id, {
 				name: champData.name,
 				type: champData.type,
 				lane: champData.lane,
@@ -52,9 +52,7 @@ const Cards = () => {
 			})
 			.then(() => {
 				pullChampions()
-			})
-			.then(() => {
-				setModal(false)
+				setDetailChamp(false)
 			})
 	}, [])
 
@@ -65,7 +63,7 @@ const Cards = () => {
 				pullChampions()
 			})
 			.then(() => {
-				setModal(false)
+				setDetailChamp(false)
 			})
 	}, [])
 
@@ -107,10 +105,10 @@ const Cards = () => {
 					<AddChamp />
 				</Modal>
 			) : null}
-			{modal ? (
+			{detailChamp ? (
 				<Modal clicked={toggleModal}>
 					<ChampDetail
-						id={modalId}
+						id={champId}
 						editThisChamp={editChampion}
 						deleteChamp={deleteChampion}
 					/>
