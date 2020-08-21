@@ -90,7 +90,8 @@ const ChampDetail = (props) => {
 		let values = keys.slice(1, 5)
 
 		championData = (
-			<form>
+			<form className="edit-champion">
+				<h1>Edit your champion</h1>
 				{values.map((value) => (
 					<input
 						key={champ[value]}
@@ -99,10 +100,14 @@ const ChampDetail = (props) => {
 						onChange={(event) => setEditChamp(value, event)}
 					/>
 				))}
-				<button onClick={() => setinputField((prev) => !prev)}>Go back</button>
-				<button type="submit" onClick={(event) => editChamp(event)}>
-					Edit champ
-				</button>
+				<div className="action-buttons">
+					<button onClick={() => setinputField((prev) => !prev)}>
+						Go back
+					</button>
+					<button type="submit" onClick={(event) => editChamp(event)}>
+						Edit champ
+					</button>
+				</div>
 			</form>
 		)
 	}
