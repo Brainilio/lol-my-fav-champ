@@ -5,6 +5,7 @@ import Spinner from "../UI/Spinner/Spinner"
 import Card from "../components/Card/Card"
 import AddChamp from "../components/AddChamp/AddChamp"
 import Modal from "../UI/Modal/Modal"
+import Slider from "../UI/Slider/Slider"
 
 const Cards = () => {
 	const [cards, setCards] = useState(null)
@@ -84,6 +85,19 @@ const Cards = () => {
 		cardSectionClasses.push("long-card-section")
 	}
 
+	const cardsDisplay = []
+	if (cards) {
+		cards.map((champion) => {
+			cardsDisplay.push(
+				<Card
+					key={champion._id}
+					layout={cardLayout}
+					clicked={toggleModal}
+					champion={champion}
+				/>
+			)
+		})
+	}
 	return (
 		<>
 			<h1
@@ -115,18 +129,11 @@ const Cards = () => {
 			{loader ? <Spinner /> : null}
 			<section className="card-page">
 				<div className={cardSectionClasses.join(" ")}>
-					{cards
-						? cards.map((champion) => {
-								return (
-									<Card
-										key={champion._id}
-										layout={cardLayout}
-										clicked={toggleModal}
-										champion={champion}
-									/>
-								)
-						  })
-						: null}
+					{cardLayout ? (
+						<Slider>{cardsDisplay.map((card) => card)}</Slider>
+					) : (
+						<>{cardsDisplay.map((card) => card)} </>
+					)}
 				</div>
 			</section>
 			{addChamp ? (
