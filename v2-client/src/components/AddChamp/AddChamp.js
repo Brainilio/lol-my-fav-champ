@@ -1,13 +1,14 @@
-import React from "react"
+import React, { useState } from "react"
 
 const AddChamp = (props) => {
+
 	return (
-		<form>
+		<form className="add-champion">
 			<input type="text" name="name" value />
 			<input type="text" name="type" value />
 			<input type="text" name="lane" value />
 			<input type="number" name="cost" value />
-			<button type="submit" />
+			<button type="submit">Add Champ</button>
 		</form>
 	)
 }
