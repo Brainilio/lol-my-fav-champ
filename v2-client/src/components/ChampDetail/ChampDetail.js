@@ -3,7 +3,6 @@ import Placeholder from "../../assets/poro.png"
 import Gif from "../../assets/giphy.gif"
 import Spinner from "../../UI/Spinner/Spinner"
 import axios from "../../axios"
-import Exit from "../../UI/Exit/Exit"
 import { useCallback } from "react"
 
 const ChampDetail = (props) => {
@@ -11,7 +10,6 @@ const ChampDetail = (props) => {
 	const [riotApiData, setriotApiData] = useState("")
 	const [champImage, setchampImage] = useState("")
 	const [inputField, setinputField] = useState(false)
-	const [editedChamp, setEditedChamp] = useState("")
 
 	const pullRiotAPIData = useCallback((name) => {
 		console.log(name)

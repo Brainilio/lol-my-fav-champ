@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react"
+import React, { useEffect, useState } from "react"
 import ChampDetail from "../components/ChampDetail/ChampDetail"
 import axiosAPI from "../axios"
 import Spinner from "../UI/Spinner/Spinner"
@@ -20,7 +20,7 @@ const Cards = () => {
 		setLoader(true)
 	}, [])
 
-	const pullChampions = useCallback(() => {
+	const pullChampions = () => {
 		axiosAPI
 			.get()
 			.then((response) => {
@@ -31,19 +31,19 @@ const Cards = () => {
 				setLoader(false)
 				console.log(error)
 			})
-	}, [])
+	}
 
-	const toggleModal = useCallback((id) => {
+	const toggleModal = (id) => {
 		console.log("toggle project")
 		setDetailChamp((prevState) => !prevState)
 		setChampId(id)
-	}, [])
+	}
 
-	const closeFormForAdding = useCallback(() => {
+	const closeFormForAdding = () => {
 		setAddChamp((prevState) => !prevState)
-	}, [])
+	}
 
-	const editChampion = useCallback((champData) => {
+	const editChampion = (champData) => {
 		axiosAPI
 			.put(`/` + champData._id, {
 				name: champData.name,
@@ -55,9 +55,9 @@ const Cards = () => {
 				pullChampions()
 				setDetailChamp(false)
 			})
-	}, [])
+	}
 
-	const deleteChampion = useCallback((champId) => {
+	const deleteChampion = (champId) => {
 		axiosAPI
 			.delete("/" + champId)
 			.then(() => {
@@ -66,9 +66,9 @@ const Cards = () => {
 			.then(() => {
 				setDetailChamp(false)
 			})
-	}, [])
+	}
 
-	const addChampion = useCallback((championData, event) => {
+	const addChampion = (championData, event) => {
 		event.preventDefault()
 		console.log(championData)
 		axiosAPI
@@ -76,7 +76,7 @@ const Cards = () => {
 			.then((response) => setSuccessMessage((prev) => !prev))
 			.then(() => setAddChamp(false))
 			.then(() => pullChampions())
-	})
+	}
 
 	return (
 		<>
