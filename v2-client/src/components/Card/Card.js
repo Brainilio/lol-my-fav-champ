@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react"
 
 const Card = (props) => {
 	const [champion, setChampion] = useState(null)
-
 	const classes = ["single-champion"]
 
 	if (props.layout) {
