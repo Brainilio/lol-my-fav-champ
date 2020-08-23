@@ -1,0 +1,58 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:&display=swap");
+
+//font-family: 'Quicksand', sans-serif;
+//font-family: "Alata", sans-serif;
+
+.Landing {
+	width: 100%;
+	height: 100vh;
+	display: flex;
+	justify-content: space-evenly;
+	align-items: center;
+
+	.text {
+		position: relative;
+		width: 100%;
+		margin-left: 30em;
+		h1 {
+			font-size: 50px;
+			font-family: "Alata", sans-serif;
+			background: linear-gradient(to right, #ffd662, #f9e09c);
+			background-clip: text;
+
+			-webkit-text-fill-color: transparent;
+		}
+		p {
+			font-family: "Quicksand", sans-serif;
+			font-size: 35px;
+			color: #fff5d9;
+			width: 50%;
+		}
+		button {
+			width: 250px;
+			height: 90px;
+			font-size: 30px;
+			font-family: "alata", sans-serif;
+			border: none;
+			background: linear-gradient(to right, #fff6de, #ffd662);
+			border-radius: 500px;
+		}
+	}
+
+	.phone {
+		z-index: 1;
+		position: relative;
+		width: 35%;
+		object-fit: contain;
+	}
+}
+
+img {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: -1;
+	object-fit: cover;
+}
