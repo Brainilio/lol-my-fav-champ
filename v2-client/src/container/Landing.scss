@@ -34,11 +34,13 @@
 		button {
 			width: 250px;
 			height: 90px;
+			color: #1c4e7b;
 			font-size: 30px;
 			font-family: "alata", sans-serif;
 			border: none;
 			background: linear-gradient(to right, #fff6de, #ffd662);
 			border-radius: 500px;
+			box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
 		}
 	}
 
@@ -46,7 +48,7 @@
 		z-index: 1;
 		position: relative;
 		width: 35%;
-		margin-right: auto;
+		margin-right: 2em;
 		object-fit: contain;
 	}
 }

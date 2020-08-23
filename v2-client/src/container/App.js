@@ -4,6 +4,7 @@ import Logo from "../assets/riot.png"
 import { gsap } from "gsap"
 import Landing from "./Landing"
 import Cards from "./Cards"
+import Login from "./Login"
 
 function App() {
 	const divOne = useRef(null)
@@ -68,7 +69,7 @@ function App() {
 			<Switch>
 				<Route path="/" exact component={Landing} />
 				<Route path="/dashboard" component={Cards} />
-				<Route path="/login" render={() => <h1>Hi</h1>} />
+				<Route path="/login" component={Login} />
 				<Route render={() => <h1>NOT FOUND</h1>} />
 			</Switch>
 		</>
