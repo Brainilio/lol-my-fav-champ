@@ -4,7 +4,7 @@ import "./Card.scss"
 
 const Card = (props) => {
 	const [champion, setChampion] = useState(null)
-	const [backgroundImg, setBackGroundImg] = useState(defaultImg)
+
 	const classes = ["single-champion"]
 
 	useEffect(() => {

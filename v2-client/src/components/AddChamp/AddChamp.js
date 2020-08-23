@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import addbanner from "../../assets/addchampionbanner.jpg"
 import "./AddChamp.scss"
 
 const AddChamp = (props) => {
@@ -23,10 +24,11 @@ const AddChamp = (props) => {
 	return (
 		<>
 			<form className="add-champion">
+				<img className="add-banner" src={addbanner} alt="" />
 				<h1>Add a new champion:</h1>
 				{fields.map((field) => (
 					<>
-						<label htmlFor="Name">{field}:</label>
+						<label htmlFor={field}>{field}:</label>
 						<input
 							type="text"
 							name={field}
