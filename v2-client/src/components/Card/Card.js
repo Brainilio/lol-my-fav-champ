@@ -23,8 +23,12 @@ const Card = (props) => {
 					className={classes.join(" ")}
 				>
 					<img
-						src={`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`}
-						alt="background"
+						src={
+							`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`
+								? `http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champion.name}_0.jpg`
+								: defaultImg
+						}
+						alt=""
 					/>
 
 					<h1>{champion.name}</h1>
