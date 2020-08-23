@@ -1,52 +1,52 @@
-import React, { useRef, useEffect, useState } from "react"
+// import React, { useRef, useEffect, useState } from "react"
 
-const Slider = (props) => {
-	const slider = useRef()
+// const Slider = (props) => {
+// 	const slider = useRef()
 
-	const [prevDisable, setPrevDisable] = useState(true)
-	const [nextDisable, setNextDisable] = useState(
-		slider.offsetWidth >= slider.scrollWidth ? true : false
-	)
-	useEffect(() => {
-		console.log(slider.current.scrollLeft + 1)
-	}, [slider])
+// 	const [prevDisable, setPrevDisable] = useState(true)
+// 	const [nextDisable, setNextDisable] = useState(
+// 		slider.offsetWidth >= slider.scrollWidth ? true : false
+// 	)
+// 	useEffect(() => {
+// 		console.log(slider.current.scrollLeft + 1)
+// 	}, [slider])
 
-	const checkButtons = (offsetWidthValue, scrollWidthValue) => {
-		setPrevDisable(slider.scrollLeft <= 0 ? true : false)
-		setNextDisable(
-			slider.scrollLeft + offsetWidthValue >= scrollWidthValue ? true : false
-		)
-	}
-	const offsetWidthValue = slider.current.offsetWidth
-	const scrollWidthValue = slider.current.clientWidth
-	return (
-		<div ref={slider} className="slider-container">
-			<div className="slider-wrapper">{props.children}</div>
-			<div
-				className={`btn prev ${prevDisable ? "disable" : ""}`}
-				disabled={prevDisable}
-				onClick={() => {
-					slider.scrollLeft -= offsetWidthValue / 2
-					checkButtons(offsetWidthValue, scrollWidthValue)
-				}}
-			>
-				{"<"}
-			</div>
-			<div
-				className={`btn next ${nextDisable ? "disable" : ""}`}
-				disabled={nextDisable}
-				onClick={() => {
-					slider.scrollLeft += offsetWidthValue / 2
-					checkButtons(offsetWidthValue, scrollWidthValue)
-				}}
-			>
-				{">"}
-			</div>
-		</div>
-	)
-}
+// 	const checkButtons = (offsetWidthValue, scrollWidthValue) => {
+// 		setPrevDisable(slider.scrollLeft <= 0 ? true : false)
+// 		setNextDisable(
+// 			slider.scrollLeft + offsetWidthValue >= scrollWidthValue ? true : false
+// 		)
+// 	}
+// 	const offsetWidthValue = slider.current.offsetWidth
+// 	const scrollWidthValue = slider.current.clientWidth
+// 	return (
+// 		<div ref={slider} className="slider-container">
+// 			<div className="slider-wrapper">{props.children}</div>
+// 			<div
+// 				className={`btn prev ${prevDisable ? "disable" : ""}`}
+// 				disabled={prevDisable}
+// 				onClick={() => {
+// 					slider.scrollLeft -= offsetWidthValue / 2
+// 					checkButtons(offsetWidthValue, scrollWidthValue)
+// 				}}
+// 			>
+// 				{"<"}
+// 			</div>
+// 			<div
+// 				className={`btn next ${nextDisable ? "disable" : ""}`}
+// 				disabled={nextDisable}
+// 				onClick={() => {
+// 					slider.scrollLeft += offsetWidthValue / 2
+// 					checkButtons(offsetWidthValue, scrollWidthValue)
+// 				}}
+// 			>
+// 				{">"}
+// 			</div>
+// 		</div>
+// 	)
+// }
 
-export default Slider
+// export default Slider
 
 // import React, { Component } from "react"
 

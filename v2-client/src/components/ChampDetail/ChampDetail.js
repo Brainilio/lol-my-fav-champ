@@ -4,7 +4,7 @@ import Gif from "../../assets/giphy.gif"
 import Spinner from "../../UI/Spinner/Spinner"
 import axios from "../../axios"
 import { useCallback } from "react"
-
+import "./ChampDetail.scss"
 const ChampDetail = (props) => {
 	const [champ, setChamp] = useState("")
 	const [riotApiData, setriotApiData] = useState("")

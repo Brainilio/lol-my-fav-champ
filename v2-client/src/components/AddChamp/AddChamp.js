@@ -1,4 +1,5 @@
 import React, { useState } from "react"
+import "./AddChamp.scss"
 
 const AddChamp = (props) => {
 	const [champToAdd, setChampToAdd] = useState({

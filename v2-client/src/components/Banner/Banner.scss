@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+
+.banner {
+	height: 30vh;
+	width: 100%;
+	display: flex;
+	position: relative;
+
+	justify-content: space-evenly;
+	align-items: center;
+
+	.background-img-banner {
+		z-index: -1;
+		width: 100vw;
+		height: 100%;
+		position: absolute;
+		object-fit: cover;
+	}
+
+	.profile-info {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		h1 {
+			margin-left: 35px;
+			background: -webkit-linear-gradient(#ffd662, #f9e09c);
+			background-clip: text;
+
+			-webkit-text-fill-color: transparent;
+			text-transform: uppercase;
+			font-size: 40px;
+			font-family: "Alata", sans-serif;
+		}
+	}
+
+	.tool-buttons {
+		display: flex;
+		flex-direction: column;
+
+		button:nth-child(1) {
+			cursor: pointer;
+			background: linear-gradient(to right, #52c3ed, #1c4e7b);
+			color: #ffd662;
+			border: none;
+			border-radius: 500px;
+			font-family: "Alata", sans-serif;
+			width: 300px;
+			height: 80px;
+			font-size: 25px;
+		}
+
+		button:nth-child(2) {
+			cursor: pointer;
+
+			background: linear-gradient(to right, #fff6de, #ffd662);
+			font-family: "Alata", sans-serif;
+			color: #0e273e;
+			border: none;
+			border-radius: 500px;
+			box-shadow: 5px 5px 5px rgba(74, 74, 74, 0.681);
+			font-size: 25px;
+			margin-top: 10px;
+			width: 300px;
+			height: 80px;
+		}
+	}
+}

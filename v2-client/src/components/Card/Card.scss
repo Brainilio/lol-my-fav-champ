@@ -1,0 +1,72 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+
+.card-section {
+	display: grid;
+	grid-template-columns: 1fr 1fr 1fr;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+
+	.single-champion {
+		margin: 20px 20px;
+		width: 200px;
+		height: 200px;
+		border: 3px solid #9c467a30;
+		box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.413);
+		border-radius: 20px;
+		border: none;
+		transition: all 0.3s ease-in-out;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		flex-direction: column;
+		justify-content: end;
+
+		&:hover {
+			box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.413);
+			scale: 1.1;
+		}
+
+		img {
+			position: absolute;
+			border: none;
+			border-radius: inherit;
+			height: inherit;
+			width: inherit;
+			object-fit: cover;
+		}
+	}
+}
+
+.long-card-section {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+
+	.long-cards {
+		height: 600px;
+		width: 400px;
+		display: flex;
+		flex-direction: column;
+		justify-content: end;
+
+		img {
+			position: absolute;
+			border: none;
+			border-radius: inherit;
+			height: inherit;
+			width: inherit;
+			object-fit: cover;
+		}
+
+		h1 {
+			font-family: "Alata", sans-serif;
+			text-transform: uppercase;
+			font-size: 50px;
+			position: absolute;
+			color: #ffd662;
+		}
+	}
+}

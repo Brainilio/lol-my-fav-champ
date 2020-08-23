@@ -2,10 +2,12 @@ import React, { useEffect, useState } from "react"
 import ChampDetail from "../components/ChampDetail/ChampDetail"
 import axiosAPI from "../axios"
 import Spinner from "../UI/Spinner/Spinner"
+import Banner from "../components/Banner/Banner"
 import Card from "../components/Card/Card"
 import AddChamp from "../components/AddChamp/AddChamp"
+import "./Cards.scss"
 import Modal from "../UI/Modal/Modal"
-import Slider from "../UI/Slider/Slider"
+// import Slider from "../UI/Slider/Slider"
 
 const Cards = () => {
 	const [cards, setCards] = useState(null)
@@ -80,6 +82,10 @@ const Cards = () => {
 			.then(() => pullChampions())
 	}
 
+	const layoutHandler = () => setCardLayout((prevstate) => !prevstate)
+
+	const addChampModalHandler = () => setAddChamp((prevState) => !prevState)
+
 	const cardSectionClasses = ["card-section"]
 	if (cardLayout) {
 		cardSectionClasses.push("long-card-section")
@@ -100,6 +106,7 @@ const Cards = () => {
 	}
 	return (
 		<>
+			<Banner cardLayout={layoutHandler} addChampion={addChampModalHandler} />
 			<h1
 				style={{
 					textAlign: "center",
@@ -109,7 +116,6 @@ const Cards = () => {
 			>
 				My League of Legends Champions:
 			</h1>
-
 			{succesMessage ? (
 				<h1
 					style={{ color: "green", textAlign: "center" }}
@@ -118,19 +124,12 @@ const Cards = () => {
 					Succesfully added your champion!
 				</h1>
 			) : null}
-			<div className="action-buttons">
-				<div onClick={() => setCardLayout((prevstate) => !prevstate)}>
-					Change layout
-				</div>
-				<div onClick={() => setAddChamp((prevState) => !prevState)}>
-					Add Champion
-				</div>
-			</div>
+
 			{loader ? <Spinner /> : null}
 			<section className="card-page">
 				<div className={cardSectionClasses.join(" ")}>
 					{cardLayout ? (
-						<Slider>{cardsDisplay.map((card) => card)}</Slider>
+						<>{cardsDisplay.map((card) => card)}</>
 					) : (
 						<>{cardsDisplay.map((card) => card)} </>
 					)}
