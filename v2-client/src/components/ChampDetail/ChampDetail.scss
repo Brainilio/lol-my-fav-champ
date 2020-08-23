@@ -1,90 +1,57 @@
+@import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:&display=swap");
+
+//font-family: 'Quicksand', sans-serif;
+//font-family: "Alata", sans-serif;
+
 .champ-details {
 	z-index: 5;
 	position: fixed;
 	top: 50%;
 	left: 50%;
+	width: auto;
+	height: auto;
 	transform: translate(-50%, -50%);
-	margin: 0 auto;
-	width: 90%;
-	height: 95%;
-	background: linear-gradient(rgb(75, 75, 220), rgb(134, 134, 228));
-	border-radius: 20px;
-	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.297);
-	transition: all 0.3s ease-out;
+	background: linear-gradient(#1c4e7b, #0e273e);
 	display: flex;
+	border-radius: 20px;
+	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+
+	span {
+		color: rgb(218, 218, 218);
+		margin: 1rem;
+	}
 
 	.information-general {
 		width: 100%;
-		height: 100%;
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-
-		.edit-champion {
-			background-color: white;
-			width: 45%;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			border-radius: 5%;
-			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
-			flex-direction: column;
-
-			input {
-				width: 50%;
-				margin: 10px;
-				height: 30px;
-				border-radius: 10px;
-				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
-					Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-				font-size: 18px;
-				border: 1px solidrgb(75, 75, 220);
-			}
-
-			button:nth-child(1) {
-				background: rgb(237, 170, 55);
-			}
-
-			button {
-				font-size: 18px;
-				margin: 20px;
-				width: 150px;
-				color: white;
-				height: 50px;
-				background: rgb(75, 75, 220);
-				border: none;
-				border-radius: 25px;
-				box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.516);
-			}
-		}
 
 		.my-information {
-			width: 45%;
-			border-radius: 5%;
-			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
-			background-color: WHITE;
 			display: flex;
 			flex-direction: column;
 			justify-content: center;
 			align-items: center;
 
-			span:nth-child(2) {
-				@extend .my-information-styling;
+			h2 {
+				margin-bottom: 0;
+				text-transform: uppercase;
+				font-size: 60px;
+				text-align: center;
+				color: #ffd662;
+				font-family: "Alata", sans-serif;
 			}
-			span:nth-child(3) {
-				@extend .my-information-styling;
-			}
-			span:nth-child(4) {
-				@extend .my-information-styling;
-			}
-			span:nth-child(5) {
-				@extend .my-information-styling;
+
+			span {
+				font-size: 35px;
+				font-family: "Quicksand", sans-serif;
+				color: #ffd662;
 			}
 
 			.clickables {
 				display: flex;
 				margin: 20px;
+				padding: 10px;
+				border-radius: 5%;
 
 				button {
 					width: 50px;
@@ -107,148 +74,424 @@
 						border: NONE;
 						box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.509);
 					}
-
-					&:hover {
-						border: none;
-						box-shadow: 5px 5px 5px rgba(94, 94, 94, 0.537);
-					}
 				}
 			}
 		}
 
-		.official-data {
-			border-radius: 5%;
-			width: 75%;
-			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
+		.solid {
+			width: 95%;
+			border-top: 1px solid rgb(232, 187, 111);
+		}
 
-			background: white;
+		.official-data {
 			display: flex;
 			flex-direction: column;
 			align-items: center;
-			justify-self: flex-end;
-			margin-top: 25px;
+			justify-content: center;
 
 			h1 {
 				text-align: center;
-				font-size: 15px;
-				color: rgb(140, 46, 98);
+				font-family: "Quicksand", sans-serif;
+				font-size: 20px;
+				color: rgb(249, 152, 205);
 			}
 
 			span:nth-child(2) {
-				font-size: 40px;
+				font-family: "Alata", sans-serif;
+				font-size: 60px;
 			}
 			span:nth-child(3) {
 				font-size: 20px;
 				color: rgb(138, 138, 138);
 			}
 
-			span:nth-child(6) {
-				margin: 10px;
-				color: rgba(159, 159, 159, 0.598);
-			}
-
 			p {
+				font-family: "Quicksand", sans-serif;
+				color: rgb(232, 187, 111);
+				font-size: 25px;
+				text-align: justify;
 				width: 85%;
 				height: 25%;
 			}
 
 			.tips {
-				margin-top: 30px;
-				width: 85%;
-				margin: 0 20;
+				margin-top: 1rem;
 				display: flex;
-				justify-content: center;
+				width: 90%;
+				justify-content: space-between;
 				align-items: baseline;
 
 				.allies {
-					width: 50%;
-					height: 100%;
-					background-color: rgb(162, 220, 137);
-					border-radius: 5%;
-					margin-right: 20px;
+					width: 45%;
 					display: flex;
 					flex-direction: column;
 
 					span {
-						margin-top: 5px;
-						font-size: 25px;
+						font-size: 23px;
 						text-align: center;
-						color: rgb(54, 116, 54);
 						text-transform: uppercase;
-						font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
-							sans-serif;
+						color: #009b77;
 					}
+
 					ul {
 						list-style: lower-greek;
 					}
 
 					li {
-						color: rgb(35, 82, 22);
-						width: 100%;
-						font-size: 15px;
-						margin: 5px;
+						margin: 15px;
+						font-size: 18px;
+						color: rgb(232, 187, 111);
 					}
 				}
 
 				.enemies {
+					width: 45%;
 					display: flex;
 					flex-direction: column;
 
-					width: 50%;
-					height: 100%;
-					background-color: rgb(213, 92, 92);
-					border-radius: 5%;
 					span {
-						margin-top: 5px;
-						font-size: 25px;
-						text-align: center;
+						font-size: 23px;
 						text-transform: uppercase;
-						font-family: Impact, Haettenschweiler, "Arial Narrow Bold",
-							sans-serif;
-						color: rgb(252, 190, 190);
+						text-align: center;
+						color: #ff6f61;
 					}
-
 					ul {
 						list-style: lower-greek;
 					}
-
 					li {
-						color: rgb(52, 41, 41);
-						width: 100%;
+						margin: 15px;
+						font-size: 18px;
+						color: rgb(232, 187, 111);
 					}
 				}
 			}
 		}
 	}
 
-	img.champion-image {
-		z-index: -1;
-		object-fit: cover;
-		top: 0;
-		right: 0;
-		width: 50%;
-		height: 100%;
-		opacity: 85%;
-		border-end-end-radius: inherit;
-		border-top-right-radius: inherit;
+	// edit champ
+	.edit-champion {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		border-radius: 5%;
+		box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
+		flex-direction: column;
+		width: 100%;
 
-		user-select: none;
-		-moz-user-select: none;
-		-webkit-user-drag: none;
-		-webkit-user-select: none;
-		-ms-user-select: none;
+		h1 {
+			color: #ffd662;
+			font-family: "Alata", sans-serif;
+		}
+
+		input {
+			margin-top: 20px;
+			height: 50px;
+			background: none;
+			width: 50%;
+			font-family: "Quicksand", sans-serif;
+			font-size: 25px;
+			outline: 0;
+			border-width: 0 0 2px;
+			border-color: #ffd662;
+			color: white;
+		}
+
+		.action-buttons {
+			display: flex;
+			align-items: center;
+			width: 100%;
+			justify-content: center;
+			button:nth-child(1) {
+				cursor: pointer;
+
+				background: linear-gradient(to right, #fff6de, #ffd662);
+				font-family: "Alata", sans-serif;
+				color: #0e273e;
+				border: none;
+				border-radius: 500px;
+				box-shadow: 5px 5px 5px rgba(74, 74, 74, 0.681);
+				font-size: 25px;
+				margin: 2em 2em;
+				width: 200px;
+				height: 80px;
+			}
+
+			button {
+				cursor: pointer;
+				background: linear-gradient(to right, #52c3ed, #1c4e7b);
+				color: #ffd662;
+				border: none;
+				border-radius: 500px;
+				font-family: "Alata", sans-serif;
+				width: 200px;
+				height: 80px;
+				margin: 2em 2em;
+				font-size: 25px;
+			}
+		}
 	}
 }
 
-.my-information-styling {
-	background-color: rgb(75, 75, 220);
-	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.502);
-	color: white;
-	font-size: 20px;
-	margin: 5px;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	width: 60%;
-	height: 10%;
+img.champion-image {
+	object-fit: cover;
 }
+
+// .champ-details {
+// 	z-index: 5;
+// 	position: fixed;
+// 	top: 50%;
+// 	left: 50%;
+// 	transform: translate(-50%, -50%);
+// 	margin: 0 auto;
+// 	width: 60%;
+// 	height: 75%;
+// 	background: linear-gradient(#1c4e7b, rgb(134, 134, 228));
+// 	border-radius: 20px;
+// 	border: none;
+// 	box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.297);
+// 	transition: all 0.3s ease-out;
+// 	display: flex;
+
+// 	.information-general {
+// 		width: 100%;
+// 		height: 100%;
+// 		display: flex;
+// 		flex-direction: column;
+// 		justify-content: center;
+// 		align-items: center;
+
+// 		.edit-champion {
+// 			background-color: white;
+// 			width: 45%;
+// 			display: flex;
+// 			justify-content: center;
+// 			align-items: center;
+// 			border-radius: 5%;
+// 			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
+// 			flex-direction: column;
+
+// 			input {
+// 				width: 50%;
+// 				margin: 10px;
+// 				height: 30px;
+// 				border-radius: 10px;
+// 				font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+// 					Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+// 				font-size: 18px;
+// 				border: 1px solidrgb(75, 75, 220);
+// 			}
+
+// 			button:nth-child(1) {
+// 				background: rgb(237, 170, 55);
+// 			}
+
+// 			button {
+// 				font-size: 18px;
+// 				margin: 20px;
+// 				width: 150px;
+// 				color: white;
+// 				height: 50px;
+// 				background: rgb(75, 75, 220);
+// 				border: none;
+// 				border-radius: 25px;
+// 				box-shadow: 3px 5px 8px rgba(0, 0, 0, 0.516);
+// 			}
+// 		}
+
+// 		.my-information {
+// 			position: absolute;
+// 			top: 10%;
+// 			width: 20%;
+// 			border-radius: 5%;
+// 			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
+// 			background-color: WHITE;
+// 			display: flex;
+// 			flex-direction: column;
+// 			justify-content: center;
+// 			align-items: center;
+
+// 			span:nth-child(2) {
+// 				@extend .my-information-styling;
+// 			}
+// 			span:nth-child(3) {
+// 				@extend .my-information-styling;
+// 			}
+// 			span:nth-child(4) {
+// 				@extend .my-information-styling;
+// 			}
+// 			span:nth-child(5) {
+// 				@extend .my-information-styling;
+// 			}
+
+// 			.clickables {
+// 				display: flex;
+// 				margin: 20px;
+
+// 				button {
+// 					width: 50px;
+// 					height: 50px;
+// 					margin: 0 20px;
+// 					text-align: center;
+// 					border-radius: 50%;
+// 					cursor: pointer;
+// 					transition: all 0.3s ease-in-out;
+
+// 					&:nth-child(1) {
+// 						color: rgb(50, 50, 50);
+// 						background-color: rgb(232, 187, 111);
+// 						border: none;
+// 						box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.509);
+// 					}
+// 					&:nth-child(2) {
+// 						color: rgb(255, 255, 255);
+// 						background-color: rgb(164, 40, 27);
+// 						border: NONE;
+// 						box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.509);
+// 					}
+
+// 					&:hover {
+// 						border: none;
+// 						box-shadow: 5px 5px 5px rgba(94, 94, 94, 0.537);
+// 					}
+// 				}
+// 			}
+// 		}
+
+// 		.official-data {
+// 			border-radius: 3% 3% 0 0;
+// 			bottom: 0;
+
+// 			width: 50%;
+// 			box-shadow: 5px 1px 2px rgba(0, 0, 0, 0.283);
+// 			position: absolute;
+// 			background: white;
+// 			display: flex;
+// 			flex-direction: column;
+// 			align-items: center;
+// 			justify-self: flex-end;
+// 			margin-top: 25px;
+
+// 			h1 {
+// 				text-align: center;
+// 				font-size: 15px;
+// 				color: rgb(140, 46, 98);
+// 			}
+
+// 			span:nth-child(2) {
+// 				font-family: "Alata", sans-serif;
+// 				font-size: 60px;
+// 			}
+// 			span:nth-child(3) {
+// 				font-size: 20px;
+// 				color: rgb(138, 138, 138);
+// 			}
+
+// 			span:nth-child(6) {
+// 				margin: 10px;
+// 				color: rgba(159, 159, 159, 0.598);
+// 			}
+
+// 			p {
+// 				width: 85%;
+// 				height: 25%;
+// 			}
+
+// 			.tips {
+// 				margin-top: 30px;
+// 				width: 85%;
+// 				margin: 0 20;
+// 				display: flex;
+
+// 				justify-content: center;
+// 				align-items: baseline;
+
+// 				.allies {
+// 					width: 50%;
+// 					height: 100%;
+// 					background-color: rgb(162, 220, 137);
+// 					border-radius: 5%;
+// 					margin-right: 20px;
+// 					display: flex;
+// 					flex-direction: column;
+
+// 					span {
+// 						margin-top: 5px;
+// 						font-size: 25px;
+// 						text-align: center;
+// 						color: rgb(54, 116, 54);
+// 						text-transform: uppercase;
+// 						font-family: "Alata", sans-serif;
+// 					}
+// 					ul {
+// 						list-style: lower-greek;
+// 					}
+
+// 					li {
+// 						color: rgb(35, 82, 22);
+// 						width: 100%;
+// 						font-size: 15px;
+// 						margin: 5px;
+// 					}
+// 				}
+
+// 				.enemies {
+// 					display: flex;
+// 					flex-direction: column;
+
+// 					width: 50%;
+// 					height: 100%;
+// 					background-color: rgb(213, 92, 92);
+// 					border-radius: 5%;
+// 					span {
+// 						margin-top: 5px;
+// 						font-size: 25px;
+// 						text-align: center;
+// 						text-transform: uppercase;
+// 						font-family: "Alata", sans-serif;
+// 						color: rgb(252, 190, 190);
+// 					}
+
+// 					ul {
+// 						list-style: lower-greek;
+// 					}
+
+// 					li {
+// 						color: rgb(52, 41, 41);
+// 						width: 100%;
+// 					}
+// 				}
+// 			}
+// 		}
+// 	}
+
+// 	img.champion-image {
+// 		z-index: -1;
+// 		object-fit: cover;
+// 		top: 0;
+// 		right: 0;
+// 		width: 50%;
+// 		height: 100%;
+// 		opacity: 85%;
+// 		border-end-end-radius: inherit;
+// 		border-top-right-radius: inherit;
+
+// 		user-select: none;
+// 		-moz-user-select: none;
+// 		-webkit-user-drag: none;
+// 		-webkit-user-select: none;
+// 		-ms-user-select: none;
+// 	}
+// }
+
+// .my-information-styling {
+// 	background-color: rgb(75, 75, 220);
+// 	box-shadow: 3px 3px 3px rgba(0, 0, 0, 0.502);
+// 	color: white;
+// 	font-size: 20px;
+// 	margin: 5px;
+// 	display: flex;
+// 	justify-content: center;
+// 	align-items: center;
+// 	width: 60%;
+// 	height: 10%;
+// }

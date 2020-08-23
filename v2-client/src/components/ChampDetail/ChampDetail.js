@@ -61,8 +61,7 @@ const ChampDetail = (props) => {
 	if (champ) {
 		championData = (
 			<div className="my-information">
-				<h1>My information</h1>
-				<span>{champ.name}</span>
+				<h2>{champ.name}</h2>
 				<span>{champ.type}</span>
 				<span>{champ.lane}</span>
 				<span>{champ.cost}</span>
@@ -128,15 +127,13 @@ const ChampDetail = (props) => {
 
 			officialData = (
 				<div className="official-data">
-					<h1>Official RIOT data found about your favorite champion!</h1>
-					<span>{championInfo.name}</span>
-					<span>{championInfo.title}</span>
 					<p>{championInfo.lore}</p>
+					<hr class="solid" />
 					<div className="tips">
 						<div className="allies">
 							<span>Ally tips</span>
 							<ul>
-								{championInfo.allytips.map((tip) => (
+								{championInfo.allytips.slice(0, 2).map((tip) => (
 									<li key={tip}>{tip}</li>
 								))}
 							</ul>
@@ -144,7 +141,7 @@ const ChampDetail = (props) => {
 						<div className="enemies">
 							<span>Enemy tips</span>
 							<ul>
-								{championInfo.enemytips.map((tip) => (
+								{championInfo.enemytips.slice(0, 2).map((tip) => (
 									<li key={tip}>{tip}</li>
 								))}
 							</ul>
@@ -161,6 +158,7 @@ const ChampDetail = (props) => {
 			<div className="champ-details">
 				<div className="information-general">
 					{championData}
+					<hr class="solid" />
 					{/* Official information */}
 					{officialData}
 				</div>

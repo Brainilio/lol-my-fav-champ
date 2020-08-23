@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react"
+import { Switch, Route, NavLink, Redirect } from "react-router-dom"
 import Logo from "../assets/riot.png"
 import { gsap } from "gsap"
+import Landing from "./Landing"
 import Cards from "./Cards"
 
 function App() {
@@ -49,7 +51,7 @@ function App() {
 
 	return (
 		<>
-			{shouldIntroExist ? (
+			{/* {shouldIntroExist ? (
 				<>
 					<img ref={logo} className="riot-logo" src={Logo} alt="riot logo" />
 					<section
@@ -61,7 +63,14 @@ function App() {
 					</section>
 				</>
 			) : null}
-			{cards}
+			{cards} */}
+
+			<Switch>
+				<Route path="/" exact component={Landing} />
+				<Route path="/dashboard" component={Cards} />
+				<Route path="/login" render={() => <h1>Hi</h1>} />
+				<Route render={() => <h1>NOT FOUND</h1>} />
+			</Switch>
 		</>
 	)
 }

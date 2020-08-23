@@ -94,7 +94,7 @@ const Cards = () => {
 	const cardsDisplay = []
 	if (cards) {
 		cards.map((champion) => {
-			cardsDisplay.push(
+			return cardsDisplay.push(
 				<Card
 					key={champion._id}
 					layout={cardLayout}
