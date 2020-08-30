@@ -1,0 +1,22 @@
+.pagination {
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%);
+	bottom: 0;
+	display: flex;
+	list-style: none;
+	justify-content: center;
+	align-items: center;
+
+	.page-item {
+		cursor: pointer;
+		margin: 30px;
+		font-size: 25px;
+
+		color: white;
+	}
+
+	.page-item:focus {
+		background: red;
+	}
+}

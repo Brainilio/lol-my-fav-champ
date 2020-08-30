@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import ChampDetail from "../components/ChampDetail/ChampDetail"
 import axiosAPI from "../axios"
 import Spinner from "../UI/Spinner/Spinner"
+import Pagination from "../UI/Pagination/Pagination"
 import Banner from "../components/Banner/Banner"
 import Card from "../components/Card/Card"
 import AddChamp from "../components/AddChamp/AddChamp"
@@ -14,27 +15,39 @@ const Cards = () => {
 	const [loader, setLoader] = useState(false)
 	const [detailChamp, setDetailChamp] = useState(false)
 	const [addChamp, setAddChamp] = useState(false)
+	const [currentPage, setCurrentPage] = useState(1)
+	const [cardsPerPage, setCardsPerPage] = useState(5)
 	const [champId, setChampId] = useState(null)
 	const [succesMessage, setSuccessMessage] = useState(false)
 	const [cardLayout, setCardLayout] = useState(false)
 
 	useEffect(() => {
-		console.log("render cards")
 		pullChampions()
 		setLoader(true)
 	}, [])
 
-	const pullChampions = () => {
-		axiosAPI
-			.get()
-			.then((response) => {
-				setLoader(false)
-				setCards(response.data.items)
-			})
-			.catch((error) => {
-				setLoader(false)
-				console.log(error)
-			})
+	const pullChampions = async () => {
+		try {
+			const data = await axiosAPI.get()
+			setCards(data.data.items)
+			setLoader(false)
+		} catch (err) {
+			setLoader(false)
+			throw new Error(err)
+		}
+	}
+
+	let indexOfLastChamp, indexOfFirstChamp, currentCards
+
+	if (cards) {
+		indexOfLastChamp = currentPage * cardsPerPage
+		indexOfFirstChamp = indexOfLastChamp - cardsPerPage
+		currentCards = cards.slice(indexOfFirstChamp, indexOfLastChamp)
+	}
+
+	//change page
+	const paginate = (pageNumber) => {
+		setCurrentPage(pageNumber)
 	}
 
 	const toggleModal = (id) => {
@@ -92,8 +105,8 @@ const Cards = () => {
 	}
 
 	const cardsDisplay = []
-	if (cards) {
-		cards.map((champion) => {
+	if (currentCards) {
+		currentCards.map((champion) => {
 			return cardsDisplay.push(
 				<Card
 					key={champion._id}
@@ -134,6 +147,13 @@ const Cards = () => {
 						<>{cardsDisplay.map((card) => card)} </>
 					)}
 				</div>
+				{cards ? (
+					<Pagination
+						cardsPerPage={cardsPerPage}
+						paginate={paginate}
+						totalCards={cards.length}
+					/>
+				) : null}
 			</section>
 			{addChamp ? (
 				<Modal clicked={closeFormForAdding}>

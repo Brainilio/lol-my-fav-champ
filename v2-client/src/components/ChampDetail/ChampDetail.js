@@ -31,11 +31,13 @@ const ChampDetail = (props) => {
 			.catch((error) => setchampImage(Placeholder))
 	}, [])
 
+	// edit the champion
 	const editChamp = (event) => {
 		event.preventDefault()
 		props.editThisChamp(champ)
 	}
 
+	// change state of champion
 	const setEditChamp = (value, event) => {
 		console.log(event.target.value)
 		let name = event.target.value
@@ -56,8 +58,10 @@ const ChampDetail = (props) => {
 			.then((response) => pullRiotAPIData(response.data.name))
 	}, [props.id, pullRiotAPIData])
 
+	// spinner before fetching champion
 	let championData = <Spinner />
 
+	// if champion load, championdata is now champion info
 	if (champ) {
 		championData = (
 			<div className="my-information">
@@ -85,6 +89,7 @@ const ChampDetail = (props) => {
 		)
 	}
 
+	// if click on edit button, change champ data to an input field for editing
 	if (inputField) {
 		const keys = Object.keys(champ)
 		let values = keys.slice(1, 5)
@@ -95,6 +100,7 @@ const ChampDetail = (props) => {
 				{values.map((value) => (
 					<input
 						key={champ[value]}
+						defaultValue={champ[value]}
 						value={champ[value]}
 						name={champ[value]}
 						onChange={(event) => setEditChamp(value, event)}
@@ -112,6 +118,7 @@ const ChampDetail = (props) => {
 		)
 	}
 
+	// show a loader or error image if there is no riot data about champion
 	let officialData = (
 		<div className="official-data">
 			<h1>Couldn't find any official data on your champion!</h1>
@@ -121,6 +128,7 @@ const ChampDetail = (props) => {
 		</div>
 	)
 
+	// if fetched riot data; pull in riot data and display
 	if (riotApiData) {
 		for (const key in riotApiData) {
 			const championInfo = riotApiData[key]
