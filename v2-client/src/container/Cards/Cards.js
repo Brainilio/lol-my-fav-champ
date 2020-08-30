@@ -8,7 +8,6 @@ import Card from "../../components/Card/Card"
 import AddChamp from "../../components/AddChamp/AddChamp"
 import "./Cards.scss"
 import Modal from "../../UI/Modal/Modal"
-// import Slider from "../UI/Slider/Slider"
 
 const Cards = () => {
 	const [cards, setCards] = useState(null)
@@ -16,7 +15,7 @@ const Cards = () => {
 	const [detailChamp, setDetailChamp] = useState(false)
 	const [addChamp, setAddChamp] = useState(false)
 	const [currentPage, setCurrentPage] = useState(1)
-	const [cardsPerPage, setCardsPerPage] = useState(5)
+	const [cardsPerPage] = useState(5)
 	const [champId, setChampId] = useState(null)
 	const [succesMessage, setSuccessMessage] = useState(false)
 	const [cardLayout, setCardLayout] = useState(false)
@@ -87,10 +86,9 @@ const Cards = () => {
 
 	const addChampion = (championData, event) => {
 		event.preventDefault()
-		console.log(championData)
 		axiosAPI
 			.post("/", championData)
-			.then((response) => setSuccessMessage((prev) => !prev))
+			.then(() => setSuccessMessage((prev) => !prev))
 			.then(() => setAddChamp(false))
 			.then(() => pullChampions())
 	}
@@ -137,7 +135,6 @@ const Cards = () => {
 					Succesfully added your champion!
 				</h1>
 			) : null}
-
 			{loader ? <Spinner /> : null}
 			<section className="card-page">
 				<div className={cardSectionClasses.join(" ")}>
