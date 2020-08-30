@@ -2,9 +2,9 @@ import React, { useEffect, useRef, useState } from "react"
 import { Switch, Route, NavLink, Redirect } from "react-router-dom"
 import Logo from "../assets/riot.png"
 import { gsap } from "gsap"
-import Landing from "./Landing"
-import Cards from "./Cards"
-import Login from "./Login"
+import Landing from "./Landing/Landing"
+import Cards from "./Cards/Cards"
+import Login from "./Login/Login"
 
 function App() {
 	const divOne = useRef(null)

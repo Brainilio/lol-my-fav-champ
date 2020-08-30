@@ -1,6 +1,6 @@
 import React from "react"
 import "./Login.scss"
-import background from "../assets/loginbackground.png"
+import background from "../../assets/loginbackground.png"
 import { NavLink } from "react-router-dom"
 
 const Login = () => {

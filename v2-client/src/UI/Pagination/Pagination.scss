@@ -14,9 +14,9 @@
 		font-size: 25px;
 
 		color: white;
-	}
 
-	.page-item:focus {
-		background: red;
+		a:focus:active {
+			background: red;
+		}
 	}
 }

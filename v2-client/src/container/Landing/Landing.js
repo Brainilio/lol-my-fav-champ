@@ -1,7 +1,7 @@
 import React from "react"
-import background from "../assets/landingbackground.png"
+import background from "../../assets/landingbackground.png"
 import { NavLink } from "react-router-dom"
-import phone from "../assets/phone.png"
+import phone from "../../assets/phone.png"
 import "./Landing.scss"
 
 const Landing = () => {
