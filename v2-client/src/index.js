@@ -4,13 +4,34 @@ import App from "./container/App"
 import { BrowserRouter } from "react-router-dom"
 import * as serviceWorker from "./serviceWorker"
 import "./styles/app.scss"
+import thunk from "redux-thunk"
+import { Provider } from "react-redux"
+import { createStore, applyMiddleware, compose, combineReducers } from "redux"
+import champReducer from "./store/reducers/champs"
+
+// redux tools
+const composeEnhancers =
+	process.env.NODE_ENV === "development"
+		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		: null || compose
+
+//combine reducers
+const rootReducer = combineReducers({
+	champs: champReducer,
+})
+
+//create store and compose applymiddleware + devtools
+const store = createStore(rootReducer, composeEnhancers(applyMiddleware(thunk)))
 
 ReactDOM.render(
-	<React.StrictMode>
-		<BrowserRouter>
-			<App />
-		</BrowserRouter>
-	</React.StrictMode>,
+	<Provider store={store}>
+		<React.StrictMode>
+			<BrowserRouter>
+				<App />
+			</BrowserRouter>
+		</React.StrictMode>
+	</Provider>,
+
 	document.getElementById("root")
 )
 
