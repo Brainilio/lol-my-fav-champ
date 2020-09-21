@@ -31,7 +31,7 @@ export const deleteChampion = (id) => {
 
 export const championEdit = () => {
 	return {
-		type: actionTypes.FETCH_CHAMPIONS_EDIT,
+		type: actionTypes.CHAMPIONS_EDIT,
 	}
 }
 
