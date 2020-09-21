@@ -62,7 +62,7 @@ const reducer = (state = initialState, action) => {
 			return fetchFail(state, action)
 		case actionTypes.FETCH_SINGLE_CHAMP_START:
 			return fetchSingleStart(state, action)
-		case actionTypes.FETCH_CHAMPIONS_SUCCESS:
+		case actionTypes.FETCH_SINGLE_CHAMP_SUCCESS:
 			return fetchSingleSuccess(state, action)
 		case actionTypes.FETCH_SINGLE_CHAMP_FAILED:
 			return fetchSingleFail(state, action)
