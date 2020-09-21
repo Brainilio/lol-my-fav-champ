@@ -39,16 +39,6 @@ const ChampDetail = (props) => {
 		props.editThisChamp(champ)
 	}
 
-	// change state of champion
-	const setEditChamp = (value, event) => {
-		console.log(event.target.value)
-		let name = event.target.value
-		setChamp((prevState) => ({
-			...prevState,
-			[value]: name,
-		}))
-	}
-
 	React.useEffect(() => {
 		console.log("Modal present")
 		props.fetchSingleChamp(props.id)
@@ -66,13 +56,13 @@ const ChampDetail = (props) => {
 	let championData = <Spinner />
 
 	// if champion load, championdata is now champion info
-	if (champ) {
+	if (props.champ) {
 		championData = (
 			<div className="my-information">
-				<h2>{champ.name}</h2>
-				<span>{champ.type}</span>
-				<span>{champ.lane}</span>
-				<span>{champ.cost}</span>
+				<h2>{props.champ.name}</h2>
+				<span>{props.champ.type}</span>
+				<span>{props.champ.lane}</span>
+				<span>{props.champ.cost}</span>
 				<div className="clickables">
 					<button
 						className="material-icons"
@@ -84,7 +74,7 @@ const ChampDetail = (props) => {
 					</button>
 					<button
 						className="material-icons"
-						onClick={() => props.deleteChamp(champ._id)}
+						onClick={() => props.deleteChamp(props.champ._id)}
 					>
 						delete
 					</button>
@@ -95,7 +85,7 @@ const ChampDetail = (props) => {
 
 	// if click on edit button, change champ data to an input field for editing
 	if (inputField) {
-		const keys = Object.keys(champ)
+		const keys = Object.keys(props.champ)
 		let values = keys.slice(1, 5)
 
 		championData = (
@@ -103,18 +93,19 @@ const ChampDetail = (props) => {
 				<h1>Edit your champion</h1>
 				{values.map((value) => (
 					<input
-						key={champ[value]}
-						defaultValue={champ[value]}
-						value={champ[value]}
-						name={champ[value]}
-						onChange={(event) => setEditChamp(value, event)}
+						key={value}
+						value={props.champ[value]}
+						onChange={(event) => props.championEdit(event, value)}
 					/>
 				))}
 				<div className="action-buttons">
 					<button onClick={() => setinputField((prev) => !prev)}>
 						Go back
 					</button>
-					<button type="submit" onClick={(event) => editChamp(event)}>
+					<button
+						type="submit"
+						onClick={(event) => props.confirmEditChampion(props.champ, event)}
+					>
 						Edit champ
 					</button>
 				</div>
@@ -198,6 +189,9 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
 	return {
 		fetchSingleChamp: (id) => dispatch(actions.fetchSingleChamp(id)),
+		championEdit: (event, val) => dispatch(actions.editChamp(event, val)),
+		confirmEditChampion: (champ, event) =>
+			dispatch(actions.editChampConfirm(champ, event)),
 	}
 }
 

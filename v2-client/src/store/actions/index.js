@@ -4,4 +4,5 @@ export {
 	addChamp,
 	fetchSingleChamp,
 	editChamp,
+	editChampConfirm,
 } from "./champs"

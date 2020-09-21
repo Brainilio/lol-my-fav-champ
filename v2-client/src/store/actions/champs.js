@@ -46,11 +46,22 @@ export const addChampion = (champ) => {
 		champ: champ,
 	}
 }
-export const championEdit = () => {
+
+export const championEdit = (event, val) => {
 	return {
 		type: actionTypes.CHAMPIONS_EDIT,
+		value: val,
+		event: event.target.value,
 	}
 }
+
+export const championEditConfirm = (champ) => {
+	return {
+		type: actionTypes.CHAMPIONS_EDIT_CONFIRM,
+		champ: champ,
+	}
+}
+
 export const deleteChampion = (id) => {
 	return {
 		type: actionTypes.CHAMPIONS_DELETE,
@@ -102,4 +113,19 @@ export const fetchSingleChamp = (id) => {
 			.catch((error) => dispatch(fetchSingleChampFail(error)))
 	}
 }
-export const editChamp = (champion) => {}
+
+export const editChamp = (event, val) => {
+	return (dispatch) => {
+		event.persist()
+		dispatch(championEdit(event, val))
+	}
+}
+
+export const editChampConfirm = (champ, event) => {
+	return (dispatch) => {
+		event.preventDefault()
+		axios.put("/" + champ._id, champ).then(() => {
+			dispatch(championEditConfirm(champ))
+		})
+	}
+}

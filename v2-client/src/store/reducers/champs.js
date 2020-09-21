@@ -41,7 +41,20 @@ const addChampion = (state, action) => {
 }
 
 const editChampion = (state, action) => {
-	return state
+	let name = action.event
+	let objectUpdate = { ...state.champ }
+	objectUpdate[action.value] = name
+	return { ...state, champ: objectUpdate }
+}
+
+const editConfirm = (state, action) => {
+	let oldObject = [...state.champs]
+	let filteredChamp = oldObject.filter(
+		(champ) => action.champ._id === champ._id
+	)
+	let index = oldObject.indexOf(filteredChamp[0])
+	oldObject[index] = action.champ
+	return { ...state, champs: oldObject, champ: action.champ }
 }
 
 const deleteChampion = (state, action) => {
@@ -70,6 +83,8 @@ const reducer = (state = initialState, action) => {
 			return addChampion(state, action)
 		case actionTypes.CHAMPIONS_EDIT:
 			return editChampion(state, action)
+		case actionTypes.CHAMPIONS_EDIT_CONFIRM:
+			return editConfirm(state, action)
 		case actionTypes.CHAMPIONS_DELETE:
 			return deleteChampion(state, action)
 		default:
