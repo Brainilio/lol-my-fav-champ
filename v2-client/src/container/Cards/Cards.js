@@ -16,14 +16,11 @@ const Cards = (props) => {
 
 	const [addChamp, setAddChamp] = useState(false)
 
-
 	const [currentPage, setCurrentPage] = useState(1)
 	const [cardsPerPage, setCardsPerPage] = useState(5)
 
-
 	const [champId, setChampId] = useState(null)
 	const [detailChamp, setDetailChamp] = useState(false)
-
 
 	const [succesMessage, setSuccessMessage] = useState(false)
 	const [cardLayout, setCardLayout] = useState(false)
@@ -32,12 +29,12 @@ const Cards = (props) => {
 		props.onFetchChamps()
 	}, [])
 
-	// --------------- PAGINATION 
+	// --------------- PAGINATION
 	let indexOfLastChamp, indexOfFirstChamp, currentCards
 	indexOfLastChamp = currentPage * cardsPerPage
 	indexOfFirstChamp = indexOfLastChamp - cardsPerPage
 	currentCards = props.champs.slice(indexOfFirstChamp, indexOfLastChamp)
-	
+
 	//change page
 	const paginate = (pageNumber) => {
 		setCurrentPage(pageNumber)
@@ -63,27 +60,26 @@ const Cards = (props) => {
 				cost: champData.cost,
 			})
 			.then(() => {
-					props.onFetchChamps()
+				props.onFetchChamps()
 				setDetailChamp(false)
 			})
 	}
 
-
-	const afterDeletion = () => { props.onFetchChamps(); setDetailChamp(false) }
-
+	const deleteChamp = (id) => {
+		props.deleteChampion(id)
+		props.onFetchChamps()
+		setDetailChamp(false)
+	}
 
 	const addChampion = (championData, event) => {
 		event.preventDefault()
-		axiosAPI
-			.post("/", championData)
-			.then(() => setSuccessMessage((prev) => !prev))
-			.then(() => setAddChamp(false))
-			.then(() => 	props.onFetchChamps())
+		props.addChampion(championData)
+		setSuccessMessage((prev) => !prev)
+		setAddChamp(false)
 	}
 
 	const layoutHandler = () => {
 		setCardLayout((prevstate) => !prevstate)
-
 	}
 
 	const addChampModalHandler = () => setAddChamp((prevState) => !prevState)
@@ -93,6 +89,7 @@ const Cards = (props) => {
 		cardSectionClasses.push("long-card-section")
 	}
 
+	// All the cards
 	const cardsDisplay = []
 	if (currentCards) {
 		currentCards.map((champion) => {
@@ -106,6 +103,7 @@ const Cards = (props) => {
 			)
 		})
 	}
+
 	return (
 		<>
 			<Banner cardLayout={layoutHandler} addChampion={addChampModalHandler} />
@@ -116,13 +114,12 @@ const Cards = (props) => {
 				</Modal>
 			) : null}
 
-
 			{detailChamp ? (
 				<Modal clicked={toggleModal}>
 					<ChampDetail
 						id={champId}
 						editThisChamp={editChampion}
-						afterDeletion={afterDeletion}
+						deleteChamp={deleteChamp}
 					/>
 				</Modal>
 			) : null}
@@ -137,8 +134,6 @@ const Cards = (props) => {
 				My League of Legends Champions:
 			</h1>
 
-
-			
 			{/* {succesMessage ? (
 				<h1
 					style={{ color: "green", textAlign: "center" }}
@@ -157,20 +152,16 @@ const Cards = (props) => {
 					{cardLayout ? (
 						<>{cardsDisplay.map((card) => card)}</>
 					) : (
-					<> {cardsDisplay.map((card) => card)} </>
+						<> {cardsDisplay.map((card) => card)} </>
 					)}
 				</div>
-				
-					
-			
 			</section>
-		
 
 			<Pagination
-						cardsPerPage={cardsPerPage}
-						paginate={paginate}
-						totalCards={props.champs.length}
-					/>
+				cardsPerPage={cardsPerPage}
+				paginate={paginate}
+				totalCards={props.champs.length}
+			/>
 		</>
 	)
 }
@@ -178,15 +169,15 @@ const Cards = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		champs: state.champs.champs,
-		loading: state.champs.loading
-
+		loading: state.champs.loading,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onFetchChamps: () => 
-			dispatch(actions.fetchChamps())
+		onFetchChamps: () => dispatch(actions.fetchChamps()),
+		deleteChampion: (id) => dispatch(actions.deleteChamp(id)),
+		addChampion: (champData) => dispatch(actions.addChamp(champData)),
 	}
 }
 

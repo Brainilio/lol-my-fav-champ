@@ -6,7 +6,7 @@ import axios from "../../axios"
 import { useCallback } from "react"
 import "./ChampDetail.scss"
 import * as actions from "../../store/actions/index"
-import {connect} from 'react-redux'
+import { connect } from "react-redux"
 
 const ChampDetail = (props) => {
 	const [champ, setChamp] = useState("")
@@ -49,14 +49,10 @@ const ChampDetail = (props) => {
 		}))
 	}
 
-	// handle delete button 
-	const deleteChampion = (id) => { 
-		props.afterDeletion()
-		props.deleteChampion(id)
-	}
-
 	React.useEffect(() => {
 		console.log("Modal present")
+		props.fetchSingleChamp(props.id)
+
 		axios
 			.get(`/${props.id}`)
 			.then((response) => {
@@ -88,7 +84,7 @@ const ChampDetail = (props) => {
 					</button>
 					<button
 						className="material-icons"
-						onClick={() => deleteChampion(champ._id)}
+						onClick={() => props.deleteChamp(champ._id)}
 					>
 						delete
 					</button>
@@ -144,7 +140,7 @@ const ChampDetail = (props) => {
 			officialData = (
 				<div className="official-data">
 					<p>{championInfo.lore}</p>
-					<hr class="solid" />
+					<hr className="solid" />
 					<div className="tips">
 						<div className="allies">
 							<span>Ally tips</span>
@@ -193,12 +189,16 @@ const ChampDetail = (props) => {
 	)
 }
 
-
-const mapDispatchToProps = (dispatch) => {
+const mapStateToProps = (state) => {
 	return {
-		deleteChampion: (id) => 
-			dispatch(actions.deleteChamp(id))
+		champ: state.champs.champ,
 	}
 }
 
-export default connect(null, mapDispatchToProps)(ChampDetail)
+const mapDispatchToProps = (dispatch) => {
+	return {
+		fetchSingleChamp: (id) => dispatch(actions.fetchSingleChamp(id)),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(ChampDetail)

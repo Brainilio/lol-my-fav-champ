@@ -1,1 +1,7 @@
-export { fetchChamps, deleteChamp } from "./champs"
+export {
+	fetchChamps,
+	deleteChamp,
+	addChamp,
+	fetchSingleChamp,
+	editChamp,
+} from "./champs"
