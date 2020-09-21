@@ -5,6 +5,8 @@ import Spinner from "../../UI/Spinner/Spinner"
 import axios from "../../axios"
 import { useCallback } from "react"
 import "./ChampDetail.scss"
+import * as actions from "../../store/actions/index"
+import {connect} from 'react-redux'
 
 const ChampDetail = (props) => {
 	const [champ, setChamp] = useState("")
@@ -47,6 +49,12 @@ const ChampDetail = (props) => {
 		}))
 	}
 
+	// handle delete button 
+	const deleteChampion = (id) => { 
+		props.afterDeletion()
+		props.deleteChampion(id)
+	}
+
 	React.useEffect(() => {
 		console.log("Modal present")
 		axios
@@ -56,7 +64,7 @@ const ChampDetail = (props) => {
 				return response
 			})
 			.then((response) => pullRiotAPIData(response.data.name))
-	}, [props.id, pullRiotAPIData])
+	}, [])
 
 	// spinner before fetching champion
 	let championData = <Spinner />
@@ -80,7 +88,7 @@ const ChampDetail = (props) => {
 					</button>
 					<button
 						className="material-icons"
-						onClick={() => props.deleteChamp(champ._id)}
+						onClick={() => deleteChampion(champ._id)}
 					>
 						delete
 					</button>
@@ -185,4 +193,12 @@ const ChampDetail = (props) => {
 	)
 }
 
-export default ChampDetail
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		deleteChampion: (id) => 
+			dispatch(actions.deleteChamp(id))
+	}
+}
+
+export default connect(null, mapDispatchToProps)(ChampDetail)

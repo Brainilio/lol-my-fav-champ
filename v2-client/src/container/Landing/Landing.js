@@ -7,7 +7,7 @@ import "./Landing.scss"
 const Landing = () => {
 	return (
 		<section className="Landing">
-			<img classname="background-img" src={background} alt="backgrround" />
+			<img className="background-img" src={background} alt="backgrround" />
 			<div className="text">
 				<h1>LOL: MY FAVORITE CHAMPION</h1>
 				<p>

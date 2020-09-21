@@ -8,49 +8,44 @@ import Card from "../../components/Card/Card"
 import AddChamp from "../../components/AddChamp/AddChamp"
 import "./Cards.scss"
 import Modal from "../../UI/Modal/Modal"
+import * as actions from "../../store/actions/index"
+import { connect } from "react-redux"
 
-const Cards = () => {
-	const [cards, setCards] = useState(null)
+const Cards = (props) => {
 	const [loader, setLoader] = useState(false)
-	const [detailChamp, setDetailChamp] = useState(false)
+
 	const [addChamp, setAddChamp] = useState(false)
+
+
 	const [currentPage, setCurrentPage] = useState(1)
-	const [cardsPerPage] = useState(5)
+	const [cardsPerPage, setCardsPerPage] = useState(5)
+
+
 	const [champId, setChampId] = useState(null)
+	const [detailChamp, setDetailChamp] = useState(false)
+
+
 	const [succesMessage, setSuccessMessage] = useState(false)
 	const [cardLayout, setCardLayout] = useState(false)
 
 	useEffect(() => {
-		pullChampions()
-		setLoader(true)
+		props.onFetchChamps()
 	}, [])
 
-	const pullChampions = async () => {
-		try {
-			const data = await axiosAPI.get()
-			setCards(data.data.items)
-			setLoader(false)
-		} catch (err) {
-			setLoader(false)
-			throw new Error(err)
-		}
-	}
-
+	// --------------- PAGINATION 
 	let indexOfLastChamp, indexOfFirstChamp, currentCards
-
-	if (cards) {
-		indexOfLastChamp = currentPage * cardsPerPage
-		indexOfFirstChamp = indexOfLastChamp - cardsPerPage
-		currentCards = cards.slice(indexOfFirstChamp, indexOfLastChamp)
-	}
-
+	indexOfLastChamp = currentPage * cardsPerPage
+	indexOfFirstChamp = indexOfLastChamp - cardsPerPage
+	currentCards = props.champs.slice(indexOfFirstChamp, indexOfLastChamp)
+	
 	//change page
 	const paginate = (pageNumber) => {
 		setCurrentPage(pageNumber)
 	}
 
+	//-----------------
+
 	const toggleModal = (id) => {
-		console.log("toggle project")
 		setDetailChamp((prevState) => !prevState)
 		setChampId(id)
 	}
@@ -68,21 +63,14 @@ const Cards = () => {
 				cost: champData.cost,
 			})
 			.then(() => {
-				pullChampions()
+					props.onFetchChamps()
 				setDetailChamp(false)
 			})
 	}
 
-	const deleteChampion = (champId) => {
-		axiosAPI
-			.delete("/" + champId)
-			.then(() => {
-				pullChampions()
-			})
-			.then(() => {
-				setDetailChamp(false)
-			})
-	}
+
+	const afterDeletion = () => { props.onFetchChamps(); setDetailChamp(false) }
+
 
 	const addChampion = (championData, event) => {
 		event.preventDefault()
@@ -90,10 +78,13 @@ const Cards = () => {
 			.post("/", championData)
 			.then(() => setSuccessMessage((prev) => !prev))
 			.then(() => setAddChamp(false))
-			.then(() => pullChampions())
+			.then(() => 	props.onFetchChamps())
 	}
 
-	const layoutHandler = () => setCardLayout((prevstate) => !prevstate)
+	const layoutHandler = () => {
+		setCardLayout((prevstate) => !prevstate)
+
+	}
 
 	const addChampModalHandler = () => setAddChamp((prevState) => !prevState)
 
@@ -118,6 +109,24 @@ const Cards = () => {
 	return (
 		<>
 			<Banner cardLayout={layoutHandler} addChampion={addChampModalHandler} />
+
+			{addChamp ? (
+				<Modal clicked={closeFormForAdding}>
+					<AddChamp clicked={addChampion} />
+				</Modal>
+			) : null}
+
+
+			{detailChamp ? (
+				<Modal clicked={toggleModal}>
+					<ChampDetail
+						id={champId}
+						editThisChamp={editChampion}
+						afterDeletion={afterDeletion}
+					/>
+				</Modal>
+			) : null}
+
 			<h1
 				style={{
 					textAlign: "center",
@@ -127,47 +136,58 @@ const Cards = () => {
 			>
 				My League of Legends Champions:
 			</h1>
-			{succesMessage ? (
+
+
+			
+			{/* {succesMessage ? (
 				<h1
 					style={{ color: "green", textAlign: "center" }}
 					onClick={() => setSuccessMessage((prev) => !prev)}
 				>
 					Succesfully added your champion!
 				</h1>
-			) : null}
-			{loader ? <Spinner /> : null}
+			) : null} */}
+
+			{/* Spinner */}
+			{props.loading ? <Spinner /> : null}
+
+			{/* Card-page */}
 			<section className="card-page">
 				<div className={cardSectionClasses.join(" ")}>
 					{cardLayout ? (
 						<>{cardsDisplay.map((card) => card)}</>
 					) : (
-						<>{cardsDisplay.map((card) => card)} </>
+					<> {cardsDisplay.map((card) => card)} </>
 					)}
 				</div>
-				{cards ? (
-					<Pagination
+				
+					
+			
+			</section>
+		
+
+			<Pagination
 						cardsPerPage={cardsPerPage}
 						paginate={paginate}
-						totalCards={cards.length}
+						totalCards={props.champs.length}
 					/>
-				) : null}
-			</section>
-			{addChamp ? (
-				<Modal clicked={closeFormForAdding}>
-					<AddChamp clicked={addChampion} />
-				</Modal>
-			) : null}
-			{detailChamp ? (
-				<Modal clicked={toggleModal}>
-					<ChampDetail
-						id={champId}
-						editThisChamp={editChampion}
-						deleteChamp={deleteChampion}
-					/>
-				</Modal>
-			) : null}
 		</>
 	)
 }
 
-export default Cards
+const mapStateToProps = (state) => {
+	return {
+		champs: state.champs.champs,
+		loading: state.champs.loading
+
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		onFetchChamps: () => 
+			dispatch(actions.fetchChamps())
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cards)
