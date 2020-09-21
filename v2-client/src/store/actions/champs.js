@@ -22,17 +22,18 @@ export const fetchChampionsFail = (error) => {
 	}
 }
 
-export const fetchChampionsDelete = () => { 
-	return { 
-		type: actionTypes.FETCH_CHAMPIONS_DELETE
+export const deleteChampion = (id) => {
+	return {
+		type: actionTypes.CHAMPIONS_DELETE,
+		id: id,
 	}
 }
 
-// export const championEdit = () => { 
-// 	return { 
-// 		type: actionTypes.
-// 	}
-// }
+export const championEdit = () => {
+	return {
+		type: actionTypes.FETCH_CHAMPIONS_EDIT,
+	}
+}
 
 export const fetchChamps = () => {
 	return (dispatch) => {
@@ -48,16 +49,17 @@ export const fetchChamps = () => {
 	}
 }
 
-export const deleteChamp = (id) => { 
-	return (dispatch) => { 
-		axios.delete("/" + id).then(() => { 
-			dispatch(fetchChampionsDelete(id))
-		}).catch(error => { 
-			console.log(error)
-		})
+export const deleteChamp = (id) => {
+	return (dispatch) => {
+		axios
+			.delete("/" + id)
+			.then(() => {
+				dispatch(deleteChampion(id))
+			})
+			.catch((error) => {
+				console.log(error)
+			})
 	}
 }
 
-export const editChamp = (champion) => { 
-
-}
+export const editChamp = (champion) => {}
