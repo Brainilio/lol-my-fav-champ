@@ -8,31 +8,40 @@ const initialState = {
 	error: null,
 }
 
+// ------------------ REDUCER METHODS -------------------- //
+
+// initializing the fetching state; set the loader on true;
 const fetchStart = (state, action) => {
 	return { ...state, loading: true }
 }
 
+// When the fetching of all champions go successfully, set the state champs to the fetched champions
 const fetchSuccess = (state, action) => {
 	return { ...state, loading: false, champs: action.champs }
 }
 
+// When fail, set the error message to the http error message
 const fetchFail = (state, action) => {
 	return { ...state, loading: false, error: action.error }
 }
 
+// This is for the detail modal; this is for initializing the fetch-single-start, in the modal there is a separate loading state
 const fetchSingleStart = (state, action) => {
 	return { ...state, singleChampLoading: true }
 }
 
+// Single champ fetching success? Set it to the champ object
 const fetchSingleSuccess = (state, action) => {
 	console.log(action.champ)
 	return { ...state, singleChampLoading: false, champ: action.champ }
 }
 
+// Single champ failed fetching? Error messsageeee...
 const fetchSingleFail = (state, action) => {
 	return { ...state, singleChampLoading: false, error: action.error }
 }
 
+// This is for adding a new champion to the state, it will eventually be added in the action methods
 const addChampion = (state, action) => {
 	let newChampion = action.champ
 	let updatedState = [...state.champs]
@@ -40,6 +49,7 @@ const addChampion = (state, action) => {
 	return { ...state, champs: updatedState }
 }
 
+// This is for editing the state of the champion, not  sending http request
 const editChampion = (state, action) => {
 	let name = action.event
 	let objectUpdate = { ...state.champ }
@@ -47,6 +57,7 @@ const editChampion = (state, action) => {
 	return { ...state, champ: objectUpdate }
 }
 
+// Satisfied with your edits? This is for confirming your edit, send it to the server
 const editConfirm = (state, action) => {
 	let oldObject = [...state.champs]
 	let filteredChamp = oldObject.filter(
@@ -57,6 +68,7 @@ const editConfirm = (state, action) => {
 	return { ...state, champs: oldObject, champ: action.champ }
 }
 
+// Deleting champion
 const deleteChampion = (state, action) => {
 	let champToDelete = [...state.champs]
 	let newChamps = champToDelete.filter((champ) => champ._id !== action.id)
@@ -64,6 +76,8 @@ const deleteChampion = (state, action) => {
 
 	return { ...state, champs: newChamps }
 }
+
+// -------------- REDUCER ---------------- //
 
 const reducer = (state = initialState, action) => {
 	switch (action.type) {

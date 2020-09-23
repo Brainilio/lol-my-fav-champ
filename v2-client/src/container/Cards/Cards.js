@@ -12,8 +12,6 @@ import * as actions from "../../store/actions/index"
 import { connect } from "react-redux"
 
 const Cards = (props) => {
-	const [loader, setLoader] = useState(false)
-
 	const [addChamp, setAddChamp] = useState(false)
 
 	const [currentPage, setCurrentPage] = useState(1)
@@ -22,25 +20,26 @@ const Cards = (props) => {
 	const [champId, setChampId] = useState(null)
 	const [detailChamp, setDetailChamp] = useState(false)
 
-	const [succesMessage, setSuccessMessage] = useState(false)
+	const [succesMessage, setSuccessMessage] = useState(true)
 	const [cardLayout, setCardLayout] = useState(false)
 
 	useEffect(() => {
 		props.onFetchChamps()
 	}, [])
 
-	// --------------- PAGINATION
 	let indexOfLastChamp, indexOfFirstChamp, currentCards
-	indexOfLastChamp = currentPage * cardsPerPage
-	indexOfFirstChamp = indexOfLastChamp - cardsPerPage
-	currentCards = props.champs.slice(indexOfFirstChamp, indexOfLastChamp)
+	const cardSectionClasses = ["card-section"]
 
+	// --------------- PAGINATION
+	if (props.champs) {
+		indexOfLastChamp = currentPage * cardsPerPage
+		indexOfFirstChamp = indexOfLastChamp - cardsPerPage
+		currentCards = props.champs.slice(indexOfFirstChamp, indexOfLastChamp)
+	}
 	//change page
 	const paginate = (pageNumber) => {
 		setCurrentPage(pageNumber)
 	}
-
-	//-----------------
 
 	const toggleModal = (id) => {
 		setDetailChamp((prevState) => !prevState)
@@ -51,18 +50,8 @@ const Cards = (props) => {
 		setAddChamp((prevState) => !prevState)
 	}
 
-	const editChampion = (champData) => {
-		axiosAPI
-			.put(`/` + champData._id, {
-				name: champData.name,
-				type: champData.type,
-				lane: champData.lane,
-				cost: champData.cost,
-			})
-			.then(() => {
-				props.onFetchChamps()
-				setDetailChamp(false)
-			})
+	const editChampion = () => {
+		setDetailChamp(false)
 	}
 
 	const deleteChamp = (id) => {
@@ -84,7 +73,6 @@ const Cards = (props) => {
 
 	const addChampModalHandler = () => setAddChamp((prevState) => !prevState)
 
-	const cardSectionClasses = ["card-section"]
 	if (cardLayout) {
 		cardSectionClasses.push("long-card-section")
 	}
@@ -106,14 +94,17 @@ const Cards = (props) => {
 
 	return (
 		<>
+			{/* Banner */}
 			<Banner cardLayout={layoutHandler} addChampion={addChampModalHandler} />
 
+			{/* Add champ modal */}
 			{addChamp ? (
 				<Modal clicked={closeFormForAdding}>
 					<AddChamp clicked={addChampion} />
 				</Modal>
 			) : null}
 
+			{/* Detail modal */}
 			{detailChamp ? (
 				<Modal clicked={toggleModal}>
 					<ChampDetail
@@ -124,24 +115,26 @@ const Cards = (props) => {
 				</Modal>
 			) : null}
 
+			{/* Title of page */}
 			<h1
 				style={{
 					textAlign: "center",
-					marginTop: "25px",
+					margin: "100px 0",
 				}}
 				className="title-card-page"
 			>
 				My League of Legends Champions:
 			</h1>
 
-			{/* {succesMessage ? (
+			{/* Success message */}
+			{succesMessage ? (
 				<h1
 					style={{ color: "green", textAlign: "center" }}
 					onClick={() => setSuccessMessage((prev) => !prev)}
 				>
 					Succesfully added your champion!
 				</h1>
-			) : null} */}
+			) : null}
 
 			{/* Spinner */}
 			{props.loading ? <Spinner /> : null}
@@ -157,11 +150,14 @@ const Cards = (props) => {
 				</div>
 			</section>
 
-			<Pagination
-				cardsPerPage={cardsPerPage}
-				paginate={paginate}
-				totalCards={props.champs.length}
-			/>
+			{/* Pagination */}
+			{props.champs ? (
+				<Pagination
+					cardsPerPage={cardsPerPage}
+					paginate={paginate}
+					totalCards={props.champs.length}
+				/>
+			) : null}
 		</>
 	)
 }

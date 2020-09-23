@@ -33,12 +33,6 @@ const ChampDetail = (props) => {
 			.catch((error) => setchampImage(Placeholder))
 	}, [])
 
-	// edit the champion
-	const editChamp = (event) => {
-		event.preventDefault()
-		props.editThisChamp(champ)
-	}
-
 	React.useEffect(() => {
 		console.log("Modal present")
 		props.fetchSingleChamp(props.id)

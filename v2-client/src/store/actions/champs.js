@@ -1,18 +1,22 @@
 import * as actionTypes from "./actionTypes"
 import axios from "../../axios"
 
-// DISPATCH
+// ------------------ DISPATCH TO REDUCER -------------------------
+//
+
 export const fetchChampionsStart = () => {
 	return {
 		type: actionTypes.FETCH_CHAMPIONS_START,
 	}
 }
+
 export const fetchChampionsSuccess = (champs) => {
 	return {
 		type: actionTypes.FETCH_CHAMPIONS_SUCCESS,
 		champs: champs,
 	}
 }
+
 export const fetchChampionsFail = (error) => {
 	return {
 		type: actionTypes.FETCH_CHAMPIONS_SUCCESS,
@@ -69,12 +73,20 @@ export const deleteChampion = (id) => {
 	}
 }
 
+// ________________________________________________________________________________________________________--
+//
+//
+//
+//
 // ASYNC METHODS
+//
+
 export const addChamp = (champ) => {
 	return (dispatch) => {
 		axios.post("/", champ).then((data) => dispatch(addChampion(data.data)))
 	}
 }
+
 export const fetchChamps = () => {
 	return (dispatch) => {
 		dispatch(fetchChampionsStart())
@@ -88,6 +100,7 @@ export const fetchChamps = () => {
 			})
 	}
 }
+
 export const deleteChamp = (id) => {
 	return (dispatch) => {
 		axios
@@ -129,3 +142,5 @@ export const editChampConfirm = (champ, event) => {
 		})
 	}
 }
+
+// pull riot api data & image
