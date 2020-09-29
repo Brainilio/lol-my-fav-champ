@@ -20,7 +20,7 @@ const Cards = (props) => {
 	const [champId, setChampId] = useState(null)
 	const [detailChamp, setDetailChamp] = useState(false)
 
-	const [succesMessage, setSuccessMessage] = useState(true)
+	const [succesMessage, setSuccessMessage] = useState(false)
 	const [cardLayout, setCardLayout] = useState(false)
 
 	useEffect(() => {
@@ -50,13 +50,8 @@ const Cards = (props) => {
 		setAddChamp((prevState) => !prevState)
 	}
 
-	const editChampion = () => {
-		setDetailChamp(false)
-	}
-
 	const deleteChamp = (id) => {
 		props.deleteChampion(id)
-		props.onFetchChamps()
 		setDetailChamp(false)
 	}
 
@@ -107,11 +102,7 @@ const Cards = (props) => {
 			{/* Detail modal */}
 			{detailChamp ? (
 				<Modal clicked={toggleModal}>
-					<ChampDetail
-						id={champId}
-						editThisChamp={editChampion}
-						deleteChamp={deleteChamp}
-					/>
+					<ChampDetail id={champId} deleteChamp={deleteChamp} />
 				</Modal>
 			) : null}
 

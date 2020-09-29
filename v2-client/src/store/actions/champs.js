@@ -1,8 +1,8 @@
 import * as actionTypes from "./actionTypes"
 import axios from "../../axios"
+import newAxios from "axios"
 
 // ------------------ DISPATCH TO REDUCER -------------------------
-//
 
 export const fetchChampionsStart = () => {
 	return {
@@ -44,6 +44,33 @@ export const fetchSingleChampFail = (error) => {
 	}
 }
 
+export const fetchChampionDataStart = () => {
+	return {
+		type: actionTypes.FETCH_SINGLE_CHAMP_DATA_START,
+	}
+}
+
+export const fetchChampionDataSuccess = (info) => {
+	return {
+		type: actionTypes.FETCH_SINGLE_CHAMP_DATA_SUCCESS,
+		info: info,
+	}
+}
+
+export const fetchChampionDataFail = (error) => {
+	return {
+		type: actionTypes.FETCH_SINGLE_CHAMP_DATA_FAILED,
+		error: error,
+	}
+}
+
+export const fetchChampionImage = (image) => {
+	return {
+		type: actionTypes.CHAMPIONS_IMAGE_FETCH,
+		image: image,
+	}
+}
+
 export const addChampion = (champ) => {
 	return {
 		type: actionTypes.CHAMPIONS_ADD,
@@ -74,12 +101,7 @@ export const deleteChampion = (id) => {
 }
 
 // ________________________________________________________________________________________________________--
-//
-//
-//
-//
 // ASYNC METHODS
-//
 
 export const addChamp = (champ) => {
 	return (dispatch) => {
@@ -115,15 +137,46 @@ export const deleteChamp = (id) => {
 }
 
 export const fetchSingleChamp = (id) => {
-	console.log(id)
 	return (dispatch) => {
-		dispatch(fetchSingleChampStart)
+		dispatch(fetchSingleChampStart())
 		axios
 			.get("/" + id)
 			.then((data) => {
 				dispatch(fetchSingleChampSuccess(data.data))
+				console.log("just fetched.. time to fetch singlechamp info..")
+				dispatch(fetchSingleChampInfo(data.data.name))
 			})
 			.catch((error) => dispatch(fetchSingleChampFail(error)))
+	}
+}
+
+export const fetchSingleChampInfo = (champName) => {
+	return (dispatch) => {
+		dispatch(fetchChampionDataStart())
+		console.log("fetching single champ info...")
+		newAxios
+			.get(
+				`http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion/${champName}.json`
+			)
+			.then((response) => {
+				console.log("i fetched the data: " + response.data)
+				dispatch(fetchChampionDataSuccess(response.data.data))
+				for (const key in response.data.data) {
+					const name = response.data.data[key].name
+					dispatch(fetchSingleChampImage(name))
+				}
+			})
+			.catch((error) => dispatch(fetchChampionDataFail(error)))
+	}
+}
+
+export const fetchSingleChampImage = (champName) => {
+	return (dispatch) => {
+		dispatch(
+			fetchChampionImage(
+				`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${champName}_0.jpg`
+			)
+		)
 	}
 }
 

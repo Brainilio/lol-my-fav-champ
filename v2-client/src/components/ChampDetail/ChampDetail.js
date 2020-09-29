@@ -1,49 +1,18 @@
 import React, { useState } from "react"
-import Placeholder from "../../assets/poro.png"
-import Gif from "../../assets/giphy.gif"
+
 import Spinner from "../../UI/Spinner/Spinner"
-import axios from "../../axios"
-import { useCallback } from "react"
 import "./ChampDetail.scss"
 import * as actions from "../../store/actions/index"
 import { connect } from "react-redux"
+import Officialdata from "./officialData/Officialdata"
+import ChampImage from "./champImage/ChampImage"
 
 const ChampDetail = (props) => {
-	const [champ, setChamp] = useState("")
-	const [riotApiData, setriotApiData] = useState("")
-	const [champImage, setchampImage] = useState("")
 	const [inputField, setinputField] = useState(false)
-
-	const pullRiotAPIData = useCallback((name) => {
-		console.log(name)
-		axios
-			.get(
-				`http://ddragon.leagueoflegends.com/cdn/10.16.1/data/en_US/champion/${name}.json`
-			)
-			.then((response) => {
-				for (const key in response.data.data) {
-					const name = response.data.data[key].name
-					setchampImage(
-						`http://ddragon.leagueoflegends.com/cdn/img/champion/splash/${name}_0.jpg`
-					)
-				}
-				setriotApiData(response.data.data)
-				return response
-			})
-			.catch((error) => setchampImage(Placeholder))
-	}, [])
 
 	React.useEffect(() => {
 		console.log("Modal present")
 		props.fetchSingleChamp(props.id)
-
-		axios
-			.get(`/${props.id}`)
-			.then((response) => {
-				setChamp(response.data)
-				return response
-			})
-			.then((response) => pullRiotAPIData(response.data.name))
 	}, [])
 
 	// spinner before fetching champion
@@ -107,68 +76,15 @@ const ChampDetail = (props) => {
 		)
 	}
 
-	// show a loader or error image if there is no riot data about champion
-	let officialData = (
-		<div className="official-data">
-			<h1>Couldn't find any official data on your champion!</h1>
-			<span>Does your champion exist?</span>
-			<img src={Gif} alt="Bard floating" />
-			<span style={{ color: "grey" }}>Data provided by Riot Games</span>
-		</div>
-	)
-
-	// if fetched riot data; pull in riot data and display
-	if (riotApiData) {
-		for (const key in riotApiData) {
-			const championInfo = riotApiData[key]
-
-			officialData = (
-				<div className="official-data">
-					<p>{championInfo.lore}</p>
-					<hr className="solid" />
-					<div className="tips">
-						<div className="allies">
-							<span>Ally tips</span>
-							<ul>
-								{championInfo.allytips.slice(0, 2).map((tip) => (
-									<li key={tip}>{tip}</li>
-								))}
-							</ul>
-						</div>
-						<div className="enemies">
-							<span>Enemy tips</span>
-							<ul>
-								{championInfo.enemytips.slice(0, 2).map((tip) => (
-									<li key={tip}>{tip}</li>
-								))}
-							</ul>
-						</div>
-					</div>
-					<span>Data provided by Riot Games</span>
-				</div>
-			)
-		}
-	}
-
 	return (
 		<>
 			<div className="champ-details">
 				<div className="information-general">
 					{championData}
 					<hr class="solid" />
-					{/* Official information */}
-					{officialData}
+					<Officialdata />
 				</div>
-
-				{/* Image */}
-				{champImage ? (
-					<img
-						className="champion-image"
-						draggable="false"
-						src={champImage}
-						alt="Champion"
-					/>
-				) : null}
+				<ChampImage />
 			</div>
 		</>
 	)

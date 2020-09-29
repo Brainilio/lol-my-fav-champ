@@ -1,10 +1,14 @@
 import * as actionTypes from "../actions/actionTypes"
+import Placeholder from "../../assets/poro.png"
 
 const initialState = {
 	champs: [],
 	champ: null,
 	loading: false,
 	singleChampLoading: false,
+	singleChampInfoLoading: false,
+	singleChampImage: Placeholder,
+	singleChampInfo: null,
 	error: null,
 }
 
@@ -45,8 +49,9 @@ const fetchSingleFail = (state, action) => {
 const addChampion = (state, action) => {
 	let newChampion = action.champ
 	let updatedState = [...state.champs]
+	state.loading = true
 	updatedState.push(newChampion)
-	return { ...state, champs: updatedState }
+	return { ...state, champs: updatedState, loading: false }
 }
 
 // This is for editing the state of the champion, not  sending http request
@@ -77,6 +82,39 @@ const deleteChampion = (state, action) => {
 	return { ...state, champs: newChamps }
 }
 
+//fetching info on champion
+const fetchSingleDataStart = (state, action) => {
+	console.log("starting to fetch")
+	return { ...state, singleChampInfoLoading: true }
+}
+
+//fetching info on champion: success
+const fetchSingleDataSuccess = (state, action) => {
+	// action.info == riot info
+	console.log(action.info)
+	return {
+		...state,
+		singleChampInfoLoading: false,
+		singleChampInfo: action.info,
+	}
+}
+
+//fetching info on champion: fail
+const fetchSingleDataFail = (state, action) => {
+	console.log(action.error)
+	return {
+		...state,
+		singleChampInfoLoading: false,
+		error: action.error,
+	}
+}
+
+//fetching info on champion: image
+const fetchSingleChampImage = (state, action) => {
+	// action.image == image
+	return { ...state, singleChampImage: action.image }
+}
+
 // -------------- REDUCER ---------------- //
 
 const reducer = (state = initialState, action) => {
@@ -93,6 +131,14 @@ const reducer = (state = initialState, action) => {
 			return fetchSingleSuccess(state, action)
 		case actionTypes.FETCH_SINGLE_CHAMP_FAILED:
 			return fetchSingleFail(state, action)
+		case actionTypes.FETCH_SINGLE_CHAMP_DATA_START:
+			return fetchSingleDataStart(state, action)
+		case actionTypes.FETCH_SINGLE_CHAMP_DATA_SUCCESS:
+			return fetchSingleDataSuccess(state, action)
+		case actionTypes.FETCH_SINGLE_CHAMP_DATA_FAILED:
+			return fetchSingleDataFail(state, action)
+		case actionTypes.CHAMPIONS_IMAGE_FETCH:
+			return fetchSingleChampImage(state, action)
 		case actionTypes.CHAMPIONS_ADD:
 			return addChampion(state, action)
 		case actionTypes.CHAMPIONS_EDIT:
