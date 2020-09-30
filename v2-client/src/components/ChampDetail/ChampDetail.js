@@ -12,7 +12,7 @@ const ChampDetail = (props) => {
 
 	React.useEffect(() => {
 		console.log("Modal present")
-		props.fetchSingleChamp(props.id)
+		props.fetchSingleChamp(props.id, props.token)
 	}, [])
 
 	// spinner before fetching champion
@@ -37,7 +37,7 @@ const ChampDetail = (props) => {
 					</button>
 					<button
 						className="material-icons"
-						onClick={() => props.deleteChamp(props.champ._id)}
+						onClick={() => props.deleteChamp(props.champ._id, props.token)}
 					>
 						delete
 					</button>
@@ -67,7 +67,9 @@ const ChampDetail = (props) => {
 					</button>
 					<button
 						type="submit"
-						onClick={(event) => props.confirmEditChampion(props.champ, event)}
+						onClick={(event) =>
+							props.confirmEditChampion(props.champ, event, props.token)
+						}
 					>
 						Edit champ
 					</button>
@@ -81,7 +83,7 @@ const ChampDetail = (props) => {
 			<div className="champ-details">
 				<div className="information-general">
 					{championData}
-					<hr class="solid" />
+					<hr className="solid" />
 					<Officialdata />
 				</div>
 				<ChampImage />
@@ -93,15 +95,17 @@ const ChampDetail = (props) => {
 const mapStateToProps = (state) => {
 	return {
 		champ: state.champs.champ,
+		token: state.auth.token,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		fetchSingleChamp: (id) => dispatch(actions.fetchSingleChamp(id)),
+		fetchSingleChamp: (id, token) =>
+			dispatch(actions.fetchSingleChamp(id, token)),
 		championEdit: (event, val) => dispatch(actions.editChamp(event, val)),
-		confirmEditChampion: (champ, event) =>
-			dispatch(actions.editChampConfirm(champ, event)),
+		confirmEditChampion: (champ, event, token) =>
+			dispatch(actions.editChampConfirm(champ, event, token)),
 	}
 }
 

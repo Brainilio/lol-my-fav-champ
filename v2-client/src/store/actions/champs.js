@@ -103,17 +103,34 @@ export const deleteChampion = (id) => {
 // ________________________________________________________________________________________________________--
 // ASYNC METHODS
 
-export const addChamp = (champ) => {
+export const addChamp = (champ, token) => {
 	return (dispatch) => {
-		axios.post("/", champ).then((data) => dispatch(addChampion(data.data)))
+		axios({
+			method: "post",
+			url: "/",
+			data: champ,
+			headers: {
+				Authorization: localStorage.getItem("login-token"),
+			},
+		})
+			.then((data) => {
+				dispatch(addChampion(data.data))
+				dispatch(fetchChamps(token))
+			})
+			.catch((error) => console.log(error))
 	}
 }
 
-export const fetchChamps = () => {
+export const fetchChamps = (token) => {
 	return (dispatch) => {
 		dispatch(fetchChampionsStart())
-		axios
-			.get()
+
+		axios({
+			method: "GET",
+			headers: {
+				Authorization: localStorage.getItem("login-token"),
+			},
+		})
 			.then((data) => {
 				dispatch(fetchChampionsSuccess(data.data.items))
 			})
@@ -123,10 +140,15 @@ export const fetchChamps = () => {
 	}
 }
 
-export const deleteChamp = (id) => {
+export const deleteChamp = (id, token) => {
 	return (dispatch) => {
+		let config = {
+			headers: {
+				authorization: localStorage.getItem("login-token"),
+			},
+		}
 		axios
-			.delete("/" + id)
+			.delete("/" + id, config)
 			.then(() => {
 				dispatch(deleteChampion(id))
 			})
@@ -136,17 +158,26 @@ export const deleteChamp = (id) => {
 	}
 }
 
-export const fetchSingleChamp = (id) => {
+export const fetchSingleChamp = (id, token) => {
 	return (dispatch) => {
 		dispatch(fetchSingleChampStart())
-		axios
-			.get("/" + id)
+		console.log(token)
+		let config = {
+			headers: {
+				authorization: localStorage.getItem("login-token"),
+			},
+		}
+		newAxios
+			.get("http://134.209.200.15:8000/champs/" + id, config)
 			.then((data) => {
+				console.log(data)
 				dispatch(fetchSingleChampSuccess(data.data))
-				console.log("just fetched.. time to fetch singlechamp info..")
 				dispatch(fetchSingleChampInfo(data.data.name))
 			})
-			.catch((error) => dispatch(fetchSingleChampFail(error)))
+			.catch((error) => {
+				console.log(error)
+				dispatch(fetchSingleChampFail(error))
+			})
 	}
 }
 
@@ -187,10 +218,15 @@ export const editChamp = (event, val) => {
 	}
 }
 
-export const editChampConfirm = (champ, event) => {
+export const editChampConfirm = (champ, event, token) => {
 	return (dispatch) => {
+		let config = {
+			headers: {
+				authorization: localStorage.getItem("login-token"),
+			},
+		}
 		event.preventDefault()
-		axios.put("/" + champ._id, champ).then(() => {
+		axios.put("/" + champ._id, champ, config).then(() => {
 			dispatch(championEditConfirm(champ))
 		})
 	}

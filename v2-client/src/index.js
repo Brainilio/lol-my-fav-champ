@@ -8,6 +8,7 @@ import thunk from "redux-thunk"
 import { Provider } from "react-redux"
 import { createStore, applyMiddleware, compose, combineReducers } from "redux"
 import champReducer from "./store/reducers/champs"
+import authReducer from "./store/reducers/auth"
 
 // redux tools
 const composeEnhancers =
@@ -18,6 +19,7 @@ const composeEnhancers =
 //combine reducers
 const rootReducer = combineReducers({
 	champs: champReducer,
+	auth: authReducer,
 })
 
 //create store and compose applymiddleware + devtools

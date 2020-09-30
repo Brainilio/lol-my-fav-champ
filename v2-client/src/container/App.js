@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react"
-import { Switch, Route } from "react-router-dom"
+import { Switch, Route, Redirect } from "react-router-dom"
 // import Logo from "../assets/riot.png"
 import { gsap } from "gsap"
 import Landing from "./Landing/Landing"
 import Cards from "./Cards/Cards"
 import Login from "./Login/Login"
+import Logout from "./Cards/Logout/Logout"
+import * as actions from "../store/actions"
+import { connect } from "react-redux"
 
-function App() {
+function App(props) {
 	const divOne = useRef(null)
 	const divTwo = useRef(null)
 	const logo = useRef(null)
@@ -17,6 +20,8 @@ function App() {
 	useEffect(() => {
 		console.log("I'm re-rendering!")
 		introHandler()
+		// try to log in
+		props.tryAutoSignUp()
 		//remove divs after 2 seconds
 		setTimeout(() => {
 			setShouldIntroExist(false)
@@ -50,6 +55,24 @@ function App() {
 		cards = <Cards />
 	}
 
+	let routes = (
+		<>
+			<Route path="/login" component={Login} />
+			<Route path="/" exact component={Landing} />
+		</>
+	)
+
+	if (props.isAuthenticated) {
+		routes = (
+			<>
+				<Route path="/logout" component={Logout} />
+				<Route path="/login" component={Login} />
+				<Route path="/dashboard" component={Cards} />
+				<Route path="/" exact component={Landing} />
+			</>
+		)
+	}
+
 	return (
 		<>
 			{/* {shouldIntroExist ? (
@@ -66,14 +89,22 @@ function App() {
 			) : null}
 			{cards} */}
 
-			<Switch>
-				<Route path="/" exact component={Landing} />
-				<Route path="/dashboard" component={Cards} />
-				<Route path="/login" component={Login} />
-				<Route render={() => <h1>NOT FOUND</h1>} />
-			</Switch>
+			<Switch>{routes}</Switch>
+			<Redirect to="/login" />
 		</>
 	)
 }
 
-export default App
+const mapStateToProps = (state) => {
+	return {
+		isAuthenticated: state.auth.token !== null,
+	}
+}
+
+const mapDispatchToProps = (dispatch) => {
+	return {
+		tryAutoSignUp: () => dispatch(actions.authCheckState()),
+	}
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(App)

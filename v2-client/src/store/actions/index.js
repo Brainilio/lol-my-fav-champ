@@ -6,3 +6,5 @@ export {
 	editChamp,
 	editChampConfirm,
 } from "./champs"
+
+export { submitForm, logOut, authCheckState } from "./auth"

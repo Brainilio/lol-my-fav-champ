@@ -9,6 +9,24 @@
 	justify-content: space-evenly;
 	align-items: center;
 
+	.log-out-button {
+		position: absolute;
+		top: 15;
+		left: 15;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		cursor: pointer;
+		background: linear-gradient(to right, #9c216a, #751a58);
+		color: #ffd662;
+		border: none;
+		border-radius: 500px;
+		font-family: "Alata", sans-serif;
+		width: 180px;
+		height: 50px;
+		font-size: 25px;
+	}
+
 	.background-img-banner {
 		z-index: -1;
 		width: 100vw;

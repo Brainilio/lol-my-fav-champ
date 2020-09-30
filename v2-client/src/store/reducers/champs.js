@@ -85,7 +85,12 @@ const deleteChampion = (state, action) => {
 //fetching info on champion
 const fetchSingleDataStart = (state, action) => {
 	console.log("starting to fetch")
-	return { ...state, singleChampInfoLoading: true }
+	return {
+		...state,
+		singleChampInfoLoading: true,
+		singleChampInfo: null,
+		singleChampImage: Placeholder,
+	}
 }
 
 //fetching info on champion: success

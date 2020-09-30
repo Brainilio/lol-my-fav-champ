@@ -3,6 +3,7 @@ import ChampDetail from "../../components/ChampDetail/ChampDetail"
 import axiosAPI from "../../axios"
 import Spinner from "../../UI/Spinner/Spinner"
 import Pagination from "../../UI/Pagination/Pagination"
+import { NavLink, Redirect } from "react-router-dom"
 import Banner from "../../components/Banner/Banner"
 import Card from "../../components/Card/Card"
 import AddChamp from "../../components/AddChamp/AddChamp"
@@ -24,8 +25,8 @@ const Cards = (props) => {
 	const [cardLayout, setCardLayout] = useState(false)
 
 	useEffect(() => {
-		props.onFetchChamps()
-	}, [])
+		props.onFetchChamps(props.token)
+	}, [props.isAuthenticated])
 
 	let indexOfLastChamp, indexOfFirstChamp, currentCards
 	const cardSectionClasses = ["card-section"]
@@ -51,13 +52,13 @@ const Cards = (props) => {
 	}
 
 	const deleteChamp = (id) => {
-		props.deleteChampion(id)
+		props.deleteChampion(id, props.token)
 		setDetailChamp(false)
 	}
 
 	const addChampion = (championData, event) => {
 		event.preventDefault()
-		props.addChampion(championData)
+		props.addChampion(championData, props.token)
 		setSuccessMessage((prev) => !prev)
 		setAddChamp(false)
 	}
@@ -78,7 +79,7 @@ const Cards = (props) => {
 		currentCards.map((champion) => {
 			return cardsDisplay.push(
 				<Card
-					key={champion._id}
+					key={champion.name}
 					layout={cardLayout}
 					clicked={toggleModal}
 					champion={champion}
@@ -87,11 +88,16 @@ const Cards = (props) => {
 		})
 	}
 
+	let authRedirect = <Redirect to="/login" />
+	if (props.isAuthenticated) {
+		authRedirect = <Redirect to="/dashboard" />
+	}
+
 	return (
 		<>
 			{/* Banner */}
 			<Banner cardLayout={layoutHandler} addChampion={addChampModalHandler} />
-
+			{authRedirect}
 			{/* Add champ modal */}
 			{addChamp ? (
 				<Modal clicked={closeFormForAdding}>
@@ -157,14 +163,17 @@ const mapStateToProps = (state) => {
 	return {
 		champs: state.champs.champs,
 		loading: state.champs.loading,
+		token: state.auth.token,
+		isAuthenticated: state.auth.token !== null,
 	}
 }
 
 const mapDispatchToProps = (dispatch) => {
 	return {
-		onFetchChamps: () => dispatch(actions.fetchChamps()),
-		deleteChampion: (id) => dispatch(actions.deleteChamp(id)),
-		addChampion: (champData) => dispatch(actions.addChamp(champData)),
+		onFetchChamps: (token) => dispatch(actions.fetchChamps(token)),
+		deleteChampion: (id, token) => dispatch(actions.deleteChamp(id, token)),
+		addChampion: (champData, token) =>
+			dispatch(actions.addChamp(champData, token)),
 	}
 }
 
