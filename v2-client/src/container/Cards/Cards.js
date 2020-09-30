@@ -22,7 +22,7 @@ const Cards = (props) => {
 	const [detailChamp, setDetailChamp] = useState(false)
 
 	const [succesMessage, setSuccessMessage] = useState(false)
-	const [cardLayout, setCardLayout] = useState(false)
+	const [cardLayout, setCardLayout] = useState(true)
 
 	useEffect(() => {
 		props.onFetchChamps(props.token)

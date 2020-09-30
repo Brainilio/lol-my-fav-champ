@@ -50,7 +50,7 @@ export const submitForm = (data, isSignup) => {
 					password: password,
 				})
 				.then(() => dispatch(authSuccess(null)))
-				.catch((error) => dispatch(authFail(error)))
+				.catch((error) => dispatch(authFail(error.message)))
 		} else {
 			const { email, password } = data
 			// handle log in
@@ -61,11 +61,10 @@ export const submitForm = (data, isSignup) => {
 				})
 				.then((response) => {
 					let token = response.data.token
-
 					localStorage.setItem("login-token", token)
 					return dispatch(authSuccess(token, response.data.data.user))
 				})
-				.catch((error) => dispatch(authFail(error)))
+				.catch((error) => dispatch(authFail(error.message)))
 		}
 	}
 }

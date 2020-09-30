@@ -23,9 +23,12 @@ const ChampDetail = (props) => {
 		championData = (
 			<div className="my-information">
 				<h2>{props.champ.name}</h2>
-				<span>{props.champ.type}</span>
-				<span>{props.champ.lane}</span>
-				<span>{props.champ.cost}</span>
+				<p>
+					{props.champ.name} is one of my favorite League of Legends characters
+					and can be considered a {props.champ.type}. {props.champ.name} should
+					be played {props.champ.lane}. <br />
+					{props.champ.name}'s price is {props.champ.cost}{" "}
+				</p>
 				<div className="clickables">
 					<button
 						className="material-icons"

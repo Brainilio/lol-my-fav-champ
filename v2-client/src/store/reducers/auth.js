@@ -8,17 +8,17 @@ const initialState = {
 }
 
 const authstart = (state, action) => {
-	console.log("i've been called to start")
 	return { ...state, loading: true }
 }
 
 const authSuccess = (state, action) => {
-	console.log("i've been called to succeed")
 	return { ...state, loading: false, token: action.token, name: action.name }
 }
 
 const authFail = (state, action) => {
-	console.log("i've been called to fail :(")
+	if (action.error.startsWith("R")) {
+		action.error = "Something went wrong!"
+	}
 	return { ...state, loading: false, error: action.error }
 }
 
