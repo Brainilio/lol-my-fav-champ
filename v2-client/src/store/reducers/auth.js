@@ -5,6 +5,7 @@ const initialState = {
 	token: null,
 	error: null,
 	name: null,
+	message: null,
 }
 
 const authstart = (state, action) => {
@@ -12,7 +13,13 @@ const authstart = (state, action) => {
 }
 
 const authSuccess = (state, action) => {
-	return { ...state, loading: false, token: action.token, name: action.name }
+	return {
+		...state,
+		loading: false,
+		token: action.token,
+		name: action.name,
+		message: action.message,
+	}
 }
 
 const authFail = (state, action) => {

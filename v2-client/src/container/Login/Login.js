@@ -37,9 +37,16 @@ const Login = (props) => {
 		errorMessage = <span className="error-message">{props.errorMessage}</span>
 	}
 
+	let successMessage = null
+	if (props.succesMessage) {
+		successMessage = (
+			<span className="success-message">{props.succesMessage}</span>
+		)
+	}
 	return (
 		<section className="Login">
 			{errorMessage}
+			{successMessage}
 			{authRedirect}
 			<img src={background} alt="" />
 
@@ -119,6 +126,7 @@ const mapStateToProps = (state) => {
 		isAuthenticated: state.auth.token !== null,
 		errorMessage: state.auth.error,
 		loading: state.auth.loading,
+		succesMessage: state.auth.message,
 	}
 }
 

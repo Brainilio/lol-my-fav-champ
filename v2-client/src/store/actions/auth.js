@@ -7,11 +7,12 @@ export const authStart = () => {
 	}
 }
 
-export const authSuccess = (token, name) => {
+export const authSuccess = (token, name, message) => {
 	return {
 		type: actionTypes.AUTH_SUCCESS,
 		token: token,
 		name: name,
+		message: message,
 	}
 }
 
@@ -49,7 +50,10 @@ export const submitForm = (data, isSignup) => {
 					email: email,
 					password: password,
 				})
-				.then(() => dispatch(authSuccess(null)))
+				.then(() => {
+					const successMessage = "Thank you for signing up. You can now log in"
+					dispatch(authSuccess(null, null, successMessage))
+				})
 				.catch((error) => dispatch(authFail(error.message)))
 		} else {
 			const { email, password } = data
@@ -61,8 +65,11 @@ export const submitForm = (data, isSignup) => {
 				})
 				.then((response) => {
 					let token = response.data.token
+					const successMessage = "Successfully logged in."
 					localStorage.setItem("login-token", token)
-					return dispatch(authSuccess(token, response.data.data.user))
+					return dispatch(
+						authSuccess(token, response.data.data.user, successMessage)
+					)
 				})
 				.catch((error) => dispatch(authFail(error.message)))
 		}

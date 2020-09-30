@@ -28,6 +28,23 @@
 		box-shadow: 8px 5px 3px rgba(0, 0, 0, 0.244);
 		transition: all 0.8s ease-in;
 	}
+	.success-message {
+		cursor: default;
+		z-index: 20;
+		position: absolute;
+		top: 10%;
+		width: 350px;
+		display: flex;
+		align-items: center;
+		font-size: 25px;
+		justify-content: center;
+		text-align: center;
+		height: 85px;
+		color: rgb(255, 255, 255);
+		background-color: rgb(82, 174, 145);
+		box-shadow: 8px 5px 3px rgba(0, 0, 0, 0.244);
+		transition: all 0.8s ease-in;
+	}
 
 	img {
 		z-index: -1;
