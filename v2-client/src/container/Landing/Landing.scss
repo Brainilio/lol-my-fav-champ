@@ -2,6 +2,8 @@
 
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:&display=swap");
 
+@import "../../styles/responsive/breakpoints.scss";
+
 //font-family: 'Quicksand', sans-serif;
 //font-family: "Alata", sans-serif;
 
@@ -9,31 +11,42 @@
 	width: 100%;
 	height: 100vh;
 	display: flex;
-
 	align-items: center;
-	margin: 0 auto;
+	// justify-content: space-around;
 
 	.text {
-		position: relative;
-		width: 100%;
-		margin-left: 30em;
+		display: flex;
+		flex-direction: column;
+		margin-left: 15em;
+
+		@include screenxl {
+			margin-left: 8em;
+		}
+
 		h1 {
-			font-size: 50px;
+			font-size: 40px;
 			font-family: "Alata", sans-serif;
 			background: linear-gradient(to right, #ffd662, #f9e09c);
 			background-clip: text;
-
 			-webkit-text-fill-color: transparent;
+
+			@include screenxl {
+				font-size: 25px;
+			}
 		}
 		p {
 			font-family: "Quicksand", sans-serif;
-			font-size: 35px;
+			font-size: 25px;
 			color: #fff5d9;
 			width: 50%;
+
+			@include screenxl {
+				font-size: 18px;
+			}
 		}
 		button {
-			width: 250px;
-			height: 90px;
+			width: 200px;
+			height: 80px;
 			color: #1c4e7b;
 			font-size: 30px;
 			font-family: "alata", sans-serif;
@@ -41,22 +54,25 @@
 			background: linear-gradient(to right, #fff6de, #ffd662);
 			border-radius: 500px;
 			box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.3);
+
+			@include screenxl {
+				width: 180px;
+				height: 60px;
+				font-size: 20px;
+			}
 		}
 	}
 
 	.phone {
-		z-index: 1;
-		position: relative;
-		width: 30%;
-		margin-right: 2em;
-		object-fit: contain;
+		width: 50%;
 	}
-
-	img {
+	.background-img {
 		position: absolute;
-		width: 100%;
-		height: 100%;
-		z-index: -1;
+		top: 0;
+		left: 0;
+		width: 100vw;
+		height: 100vh;
+		z-index: -200;
 		object-fit: cover;
 	}
 }

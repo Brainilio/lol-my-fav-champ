@@ -1,10 +1,11 @@
 @import "uiElements.scss";
+@import "./responsive/breakpoints.scss";
 
 body {
 	background: linear-gradient(#343148, #2b5980);
 	padding: 0;
 	margin: 0;
-	min-height: 100vh;
+	height: 100vh;
 	width: 100vw;
 	overflow-x: hidden;
 	box-sizing: border-box;
@@ -12,6 +13,28 @@ body {
 		"Lucida Sans Unicode", Geneva, Verdana, sans-serif;
 }
 
+.responsive-blocker {
+	display: none;
+	@include screenl {
+		display: block;
+		top: 0;
+		left: 0;
+		background: linear-gradient(#8b4343, #405fcd);
+		z-index: 200;
+		position: absolute;
+		width: 100vw;
+		height: 100vh;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+
+		span {
+			color: white;
+			text-align: center;
+			font-size: 25px;
+		}
+	}
+}
 .riot-logo {
 	z-index: 1;
 	position: absolute;

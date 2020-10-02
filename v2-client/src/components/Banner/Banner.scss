@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
 
 .banner {
-	height: 30vh;
+	height: 20vh;
 	width: 100%;
 	display: flex;
 	position: relative;
@@ -22,9 +22,9 @@
 		border: none;
 		border-radius: 500px;
 		font-family: "Alata", sans-serif;
-		width: 180px;
-		height: 50px;
-		font-size: 25px;
+		width: 150px;
+		height: 35px;
+		font-size: 15px;
 	}
 
 	.background-img-banner {
@@ -47,7 +47,7 @@
 
 			-webkit-text-fill-color: transparent;
 			text-transform: uppercase;
-			font-size: 40px;
+			font-size: 25px;
 			font-family: "Alata", sans-serif;
 		}
 	}
@@ -63,9 +63,9 @@
 			border: none;
 			border-radius: 500px;
 			font-family: "Alata", sans-serif;
-			width: 300px;
-			height: 80px;
-			font-size: 25px;
+			width: 200px;
+			height: 50px;
+			font-size: 15px;
 		}
 
 		button:nth-child(2) {
@@ -77,10 +77,10 @@
 			border: none;
 			border-radius: 500px;
 			box-shadow: 5px 5px 5px rgba(74, 74, 74, 0.681);
-			font-size: 25px;
+			font-size: 15px;
 			margin-top: 10px;
-			width: 300px;
-			height: 80px;
+			width: 200px;
+			height: 50px;
 		}
 	}
 }

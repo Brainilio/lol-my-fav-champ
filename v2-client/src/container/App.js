@@ -35,6 +35,11 @@ function App(props) {
 
 	return (
 		<>
+			<div className="responsive-blocker">
+				<span>
+					Please open this app in a browser with a width of at least 1280px;
+				</span>
+			</div>
 			<Switch>{routes}</Switch>
 			{/* <Redirect to="/" /> */}
 		</>

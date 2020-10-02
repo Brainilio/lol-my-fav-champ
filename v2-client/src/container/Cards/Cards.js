@@ -116,7 +116,7 @@ const Cards = (props) => {
 			<h1
 				style={{
 					textAlign: "center",
-					margin: "100px 0",
+					margin: "20px 0",
 				}}
 				className="title-card-page"
 			>

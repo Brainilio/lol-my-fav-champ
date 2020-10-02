@@ -1,11 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
-
+@import "../../styles/responsive/breakpoints.scss";
 .card-section {
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr;
 	justify-content: center;
 	align-items: center;
-	position: relative;
+	// position: relative;
 
 	.single-champion {
 		margin: 20px 20px;
@@ -21,6 +21,11 @@
 		cursor: pointer;
 		flex-direction: column;
 		justify-content: flex-end;
+
+		@include screenxl {
+			width: 180px;
+			height: 180px;
+		}
 
 		&:hover {
 			box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.413);
@@ -42,14 +47,19 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: relative;
+	// position: relative;
 
 	.long-cards {
-		height: 600px;
-		width: 400px;
+		height: 450px;
+		width: 300px;
 		display: flex;
 		flex-direction: column;
 		justify-content: flex-end;
+
+		@include screenxl {
+			width: 220px;
+			height: 390px;
+		}
 
 		img {
 			position: absolute;
@@ -66,6 +76,10 @@
 			font-size: 50px;
 			position: absolute;
 			color: #ffd662;
+
+			@include screenxl {
+				font-size: 35px;
+			}
 		}
 	}
 }

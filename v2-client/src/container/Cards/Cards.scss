@@ -1,16 +1,15 @@
 @import url("https://fonts.googleapis.com/css2?family=Alata&display=swap");
 
 .card-page {
-	height: 100%;
+	min-height: 100%;
 	width: 100vw;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	margin: 5em auto;
 }
 
 .title-card-page {
-	font-size: 50px;
+	font-size: 25px;
 	color: #ffd662;
 	font-family: "Alata", sans-serif;
 }
