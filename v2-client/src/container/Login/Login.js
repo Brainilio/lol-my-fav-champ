@@ -32,9 +32,14 @@ const Login = (props) => {
 	if (props.isAuthenticated) {
 		authRedirect = <Redirect to="/dashboard" />
 	}
+
 	let errorMessage = null
 	if (props.errorMessage) {
 		errorMessage = <span className="error-message">{props.errorMessage}</span>
+
+		setTimeout(() => {
+			errorMessage = null
+		}, 3000)
 	}
 
 	let successMessage = null
@@ -42,6 +47,10 @@ const Login = (props) => {
 		successMessage = (
 			<span className="success-message">{props.succesMessage}</span>
 		)
+
+		setTimeout(() => {
+			successMessage = null
+		}, 3000)
 	}
 	return (
 		<section className="Login">

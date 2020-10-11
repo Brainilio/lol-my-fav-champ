@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react"
 import ChampDetail from "../../components/ChampDetail/ChampDetail"
-import axiosAPI from "../../axios"
 import Spinner from "../../UI/Spinner/Spinner"
 import Pagination from "../../UI/Pagination/Pagination"
 import { NavLink, Redirect } from "react-router-dom"
@@ -89,6 +88,7 @@ const Cards = (props) => {
 	}
 
 	let authRedirect = <Redirect to="/login" />
+
 	if (props.isAuthenticated) {
 		authRedirect = <Redirect to="/dashboard" />
 	}
