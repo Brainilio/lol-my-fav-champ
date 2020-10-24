@@ -1,4 +1,4 @@
-# V2 is in production! - August 2020
+# V2! - August 2020
 - New features: Authentication 
 - Client-Side in ReactJS with cleaner layout and combined apis for more user engagement
 
