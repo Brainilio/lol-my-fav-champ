@@ -1,5 +1,5 @@
 import * as actionTypes from "./actionTypes"
-import axios from "axios"
+import axios from "../../axios"
 
 export const authStart = () => {
 	return {
@@ -45,7 +45,7 @@ export const submitForm = (data, isSignup) => {
 			const { name, email, password } = data
 			// handle register
 			axios
-				.post("http://134.209.200.15:8000/user/register", {
+				.post("/user/register", {
 					name: name,
 					email: email,
 					password: password,
@@ -59,7 +59,7 @@ export const submitForm = (data, isSignup) => {
 			const { email, password } = data
 			// handle log in
 			axios
-				.post("http://134.209.200.15:8000/user/login", {
+				.post("/user/login", {
 					email: email,
 					password: password,
 				})

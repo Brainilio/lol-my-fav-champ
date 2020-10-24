@@ -107,7 +107,7 @@ export const addChamp = (champ, token) => {
 	return (dispatch) => {
 		axios({
 			method: "post",
-			url: "/",
+			url: "/champs",
 			data: champ,
 			headers: {
 				Authorization: localStorage.getItem("login-token"),
@@ -126,6 +126,7 @@ export const fetchChamps = (token) => {
 		dispatch(fetchChampionsStart())
 
 		axios({
+			url: "/champs",
 			method: "GET",
 			headers: {
 				Authorization: localStorage.getItem("login-token"),
@@ -144,11 +145,11 @@ export const deleteChamp = (id, token) => {
 	return (dispatch) => {
 		let config = {
 			headers: {
-				authorization: localStorage.getItem("login-token"),
+				Authorization: token,
 			},
 		}
 		axios
-			.delete("/" + id, config)
+			.delete("/champs/" + id, config)
 			.then(() => {
 				dispatch(deleteChampion(id))
 			})
@@ -162,13 +163,18 @@ export const fetchSingleChamp = (id, token) => {
 	return (dispatch) => {
 		dispatch(fetchSingleChampStart())
 		console.log(token)
+		// let config = {
+		// 	headers: {
+		// 		Authorization: localStorage.getItem("login-token"),
+		// 	},
+		// }
 		let config = {
 			headers: {
-				authorization: localStorage.getItem("login-token"),
+				Authorization: token,
 			},
 		}
-		newAxios
-			.get("http://134.209.200.15:8000/champs/" + id, config)
+		axios
+			.get("/champs/" + id, config)
 			.then((data) => {
 				console.log(data)
 				dispatch(fetchSingleChampSuccess(data.data))
@@ -220,15 +226,19 @@ export const editChamp = (event, val) => {
 
 export const editChampConfirm = (champ, event, token) => {
 	return (dispatch) => {
+		console.log(champ)
 		let config = {
 			headers: {
-				authorization: localStorage.getItem("login-token"),
+				Authorization: token,
 			},
 		}
 		event.preventDefault()
-		axios.put("/" + champ._id, champ, config).then(() => {
-			dispatch(championEditConfirm(champ))
-		})
+		axios
+			.patch("/champs/" + champ._id, champ, config)
+			.then(() => {
+				dispatch(championEditConfirm(champ))
+			})
+			.catch((error) => console.log(error.message))
 	}
 }
 
