@@ -2,6 +2,8 @@
 - New features: Authentication 
 - Client-Side in ReactJS with cleaner layout and combined apis for more user engagement
 
+Live: http://ec2-18-192-56-124.eu-central-1.compute.amazonaws.com/
+
 ### V1 - 2018
 
 **_SERVER IS DOWN_**
