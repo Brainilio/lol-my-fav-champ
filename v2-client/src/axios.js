@@ -1,7 +1,7 @@
 import axios from "axios"
 
 const instance = axios.create({
-	baseURL: "http://18.192.56.124:2000/",
+	baseURL: process.env.REACT_APP_API_KEY,
 })
 
 export default instance
